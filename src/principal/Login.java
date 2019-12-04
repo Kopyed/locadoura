@@ -5,6 +5,12 @@
  */
 package principal;
 
+import DAO.FuncionarioDAO;
+import DAO.conexao;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+
 /**
  *
  * @author paulo
@@ -27,12 +33,14 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
         lblusuario = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfUsuario = new javax.swing.JTextField();
         lblusuario1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btEntrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        pfSenha = new javax.swing.JPasswordField();
+        jProgressBar2 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,9 +52,14 @@ public class Login extends javax.swing.JFrame {
         lblusuario1.setForeground(new java.awt.Color(255, 255, 255));
         lblusuario1.setText("Senha:");
 
-        jButton1.setBackground(new java.awt.Color(51, 204, 0));
-        jButton1.setText("Entrar");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 204, 0), 4));
+        btEntrar.setBackground(new java.awt.Color(51, 204, 0));
+        btEntrar.setText("Entrar");
+        btEntrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 204, 0), 4));
+        btEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEntrarActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(204, 0, 0));
         jButton2.setText("Sair");
@@ -62,16 +75,17 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(tfUsuario))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblusuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(pfSenha)
+                            .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -80,23 +94,65 @@ public class Login extends javax.swing.JFrame {
                 .addGap(102, 102, 102)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblusuario)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblusuario1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
+                    .addComponent(lblusuario1)
+                    .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(btEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
+
+        Connection con = conexao.AbrirConexao();    
+        FuncionarioDAO sql = new FuncionarioDAO(con);
+        String login = tfUsuario.getText();
+        String senha = pfSenha.getText();
+        if(login.equalsIgnoreCase("") || senha.equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null,"Nenhum campo pode estar Vazio",
+                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
+            tfUsuario.setText("");
+            pfSenha.setText("");
+        }else{
+          if(sql.Logar(login,senha) == true){
+             new Thread(){
+                 public void run(){
+                     for ( int i = 0 ; i < 1; i++){
+                         jProgressBar2.setValue(i);
+                         try{
+                             Thread.sleep(35);
+                         }catch(Exception ex){
+                             ex.getMessage();
+                         }
+                         
+                      new Menu().setVisible(true);
+                      dispose();
+                         
+                     }
+                     
+                 }
+             } .start();
+          }  else{
+          
+              JOptionPane.showMessageDialog(null,"Usuário ou senha invalidos",
+                      "Video Locadora", JOptionPane.ERROR_MESSAGE);
+          
+              tfUsuario.setText("");
+              pfSenha.setText("");
+          }
+        
+        }
+        
+    }//GEN-LAST:event_btEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,11 +190,13 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btEntrar;
     private javax.swing.JButton jButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JLabel lblusuario;
     private javax.swing.JLabel lblusuario1;
+    private javax.swing.JPasswordField pfSenha;
+    private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 }
