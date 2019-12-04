@@ -27,14 +27,32 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenuItem3.setText("jMenuItem3");
+
+        jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Video Locadora");
@@ -45,17 +63,36 @@ public class Menu extends javax.swing.JFrame {
 
         jButton6.setText("Sair");
 
-        jMenu1.setText("Cadastrar");
+        jMenu1.setText("cadastrar");
+
+        jMenuItem5.setText("Cliente");
+        jMenu1.add(jMenuItem5);
+
+        jMenuItem6.setText("Filme");
+        jMenu1.add(jMenuItem6);
+
+        jMenuItem7.setText("DVD");
+        jMenu1.add(jMenuItem7);
+
+        jMenuItem8.setText("Categoria");
+        jMenu1.add(jMenuItem8);
+
+        jMenuItem9.setText("Classificação");
+        jMenu1.add(jMenuItem9);
+
+        jMenuItem10.setText("Funcionário");
+        jMenu1.add(jMenuItem10);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Consultar");
+        jMenu2.setText("Consultar");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Alterar");
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Alterar");
+        jMenu4.setText("Excluir");
         jMenuBar1.add(jMenu4);
-
-        jMenu5.setText("Excluir");
-        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -126,9 +163,19 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
