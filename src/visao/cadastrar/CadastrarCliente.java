@@ -298,7 +298,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
              {
                JOptionPane.showMessageDialog(null, "Nenhum Campo pode estar vazio ","Video Locadora",
                        JOptionPane.WARNING_MESSAGE);
-             }else{
+        }else{
                 Connection con = conexao.AbrirConexao();
                 clienteDAO sql = new clienteDAO(con);
                 int n = Integer.parseInt(numero);
@@ -318,9 +318,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
            
             try { 
                 sql.Inserir_Cliente(a);
-            } catch (SQLException ex) {
-                Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
                 conexao.FecharConexao(con);
                 
                 jTF_Nome.setText("");
@@ -336,6 +333,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "cadastro Realizado com Sucesso",
                         "Video Locadora",JOptionPane.INFORMATION_MESSAGE);
                 dispose();
+            } catch (SQLException ex) {
+               
+            }
         }
         
     }//GEN-LAST:event_btSalvarActionPerformed
