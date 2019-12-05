@@ -28,4 +28,8 @@ public class conexao {
             System.out.println(e.getMessage());
         }
     }
+
+    public static void FecharConexao(Connection con) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
