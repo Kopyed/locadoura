@@ -17,14 +17,16 @@ public class ConsultarCliente extends javax.swing.JFrame {
     public ConsultarCliente() {
         initComponents();
         
-        setTitle("Vídeo Locadoa");
+        setTitle("Vídeo Locadora");
         setSize(970, 380);
         AtualizaTable();
     }
+    
     private void AtualizaTable(){
         Connection con = conexao.AbrirConexao();
         clienteDAO bd = new clienteDAO(con);
         List<Cliente> lista = new ArrayList<>();
+        lista = bd.ListarCliente();
         DefaultTableModel tbm = (DefaultTableModel) jTable.getModel();
         while (tbm.getRowCount() > 0){
             tbm.removeRow(0);
@@ -32,14 +34,15 @@ public class ConsultarCliente extends javax.swing.JFrame {
         int i = 0;
         for (Cliente tab : lista){
             tbm.addRow(new String[1]);
-            jTable.setValueAt();
-            jTable.setValueAt();
-            jTable.setValueAt();
-            jTable.setValueAt();
-            jTable.setValueAt();
-            jTable.setValueAt();
+            jTable.setValueAt(tab.getCodigo(), i, 0);
+            jTable.setValueAt(tab.getNome(), i, 1);
+            jTable.setValueAt(tab.getRG(), i, 2);
+            jTable.setValueAt(tab.getCPF(), i, 3);
+            jTable.setValueAt(tab.getTelefone(), i, 4);
+            jTable.setValueAt(tab.getEmail(), i, 5);
             i++;
         }
+        conexao.FecharConexao(con);
     }
   
     @SuppressWarnings("unchecked")
@@ -72,6 +75,11 @@ public class ConsultarCliente extends javax.swing.JFrame {
         jButton2.setText("Lupa");
 
         jButton3.setText("TODOS");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,8 +138,16 @@ public class ConsultarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+
+            // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

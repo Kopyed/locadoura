@@ -4,6 +4,7 @@ package DAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 
 public class clienteDAO extends ExecuteSQL{
@@ -37,8 +38,8 @@ public class clienteDAO extends ExecuteSQL{
            return e.getMessage();
        }
    } 
- public List<Cliente> Listar(){ 
-     String sql = "select idcliente, nome,rg,cpf,telefone,email from cliente";
+ public List<Cliente> ListarCliente(){ 
+     String sql = "select idcliente,nome,rg,cpf,telefone,email from cliente";
         List<Cliente> lista = new ArrayList<>();
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -65,4 +66,6 @@ public class clienteDAO extends ExecuteSQL{
             return null;
         }    
  }
+ 
 }
+

@@ -19,7 +19,7 @@ public class conexao {
                      return con;   
     }
     
-    public static void FechatConexão (Connection con){
+    public static void FecharConexao (Connection con){
         
         try {
          con.close();
@@ -29,11 +29,10 @@ public class conexao {
         }
     }
 
-    public static void FecharConexao(Connection con) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     public static Connection Abrirconexao() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }
