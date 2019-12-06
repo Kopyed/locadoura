@@ -31,7 +31,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblcadastro2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTF_Numero" min="-2" pref="86" max="-2" attributes="0"/>
+                      <Component id="jTF_Codigo" min="-2" pref="86" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -83,7 +83,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="lblcadastro11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField10" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="jTF_Numero" min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -113,7 +113,7 @@
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblcadastro2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTF_Numero" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTF_Codigo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -139,7 +139,7 @@
                   <Component id="lblcadastro8" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTF_Rua" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblcadastro11" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTF_Numero" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -198,7 +198,10 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="jTF_Numero">
+    <Component class="javax.swing.JTextField" name="jTF_Codigo">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTF_CodigoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblcadastro2">
       <Properties>
@@ -288,7 +291,7 @@
         <Property name="text" type="java.lang.String" value="N&#xb0;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField10">
+    <Component class="javax.swing.JTextField" name="jTF_Numero">
     </Component>
     <Component class="javax.swing.JLabel" name="lblcadastro12">
       <Properties>
@@ -383,6 +386,9 @@
           <Format format="(##)# ####-####" subtype="-1" type="5"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTF_TelefoneActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
