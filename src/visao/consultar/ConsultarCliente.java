@@ -73,6 +73,11 @@ public class ConsultarCliente extends javax.swing.JFrame {
         jLabel2.setText("Pesquisa por Código:");
 
         jButton2.setText("Lupa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("TODOS");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +153,10 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
