@@ -160,7 +160,7 @@ public class clienteDAO extends ExecuteSQL{
       String sql = "select nome from cliente order by nome";
       List<Cliente> lista = new ArrayList<>();
       try{
-          PreparedStatement ps = getCon().preparedStatement(sql);
+          PreparedStatement ps =  getCon().prepareStatement(sql);
           ResultSet rs = ps.executeQuery();
           
           if(rs != null){
