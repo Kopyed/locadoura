@@ -5,6 +5,11 @@
  */
 package visao.alterar;
 
+import DAO.clienteDAO;
+import DAO.conexao;
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author paulo
@@ -30,7 +35,7 @@ public class AlterarCliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblcadastro = new javax.swing.JLabel();
         lblcadastro4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTF_cod = new javax.swing.JTextField();
         btOK = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblcadastro5 = new javax.swing.JLabel();
@@ -64,7 +69,6 @@ public class AlterarCliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblcadastro.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblcadastro.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro.setText("Alterar Cliente");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -85,55 +89,60 @@ public class AlterarCliente extends javax.swing.JFrame {
         );
 
         lblcadastro4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro4.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro4.setText("Digite o Código:");
 
+        jTF_cod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_codActionPerformed(evt);
+            }
+        });
+
         btOK.setText("ok");
+        btOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btOKActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         lblcadastro5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro5.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro5.setText("Nº do cliente:");
 
         lblcadastro6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro6.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro6.setText("RG:");
 
         lblcadastro7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro7.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro7.setText("Nome:");
 
         lblcadastro8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro8.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro8.setText("CPF:");
 
         lblcadastro9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro9.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro9.setText("Telefone:");
 
         lblcadastro10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro10.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro10.setText("Data de Nascimento:");
 
+        jTF_Nascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_NascimentoActionPerformed(evt);
+            }
+        });
+
         lblcadastro11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro11.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro11.setText("Rua:");
 
         lblcadastro12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro12.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro12.setText("Nº");
 
         lblcadastro13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro13.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro13.setText("Bairro:");
 
         lblcadastro14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro14.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro14.setText("CEP:");
 
         lblcadastro15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro15.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro15.setText("Email:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -265,7 +274,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(lblcadastro4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTF_cod, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btOK, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -283,7 +292,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTF_cod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblcadastro4)
                     .addComponent(btOK))
                 .addGap(18, 18, 18)
@@ -298,6 +307,45 @@ public class AlterarCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
+
+        String codigo = jTF_cod.getText();
+        Connection con = conexao.AbrirConexao();
+        clienteDAO sql = new clienteDAO(con);
+        int cod = Integer.parseInt(codigo);
+        if(sql.Testar_Cliente(cod) == false){
+            JOptionPane.showMessageDialog(null,"Código não encontrado no banco",
+                    "Video locadora", JOptionPane.ERROR_MESSAGE);
+            conexao.FecharConexao(con);
+        }
+        if (codigo.equals("")){
+            JOptionPane.showMessageDialog(null,"Digite um codigo para atualizar",
+                    "video locadora", JOptionPane.WARNING_MESSAGE);
+        }
+        jTF_Codigo.setText("");
+        jTF_Nome.setText("");
+        jTF_CEP.setText("");
+        jTF_Numero.setText("");
+        jTF_Bairro.setText("");
+        jTF_Email.setText("");
+        jTF_Telefone.setText("");
+        jTF_Rua.setText("");
+        jTF_Nascimento.setText("");
+        jTF_RG.setText("");
+        jTF_CPF.setText("");
+        
+        InserirDados(cod);
+        jTF_cod.setText("");
+    }//GEN-LAST:event_btOKActionPerformed
+
+    private void jTF_codActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_codActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_codActionPerformed
+
+    private void jTF_NascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_NascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_NascimentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,7 +400,7 @@ public class AlterarCliente extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTF_RG;
     private javax.swing.JTextField jTF_Rua;
     private javax.swing.JFormattedTextField jTF_Telefone;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTF_cod;
     private javax.swing.JLabel lblcadastro;
     private javax.swing.JLabel lblcadastro10;
     private javax.swing.JLabel lblcadastro11;
