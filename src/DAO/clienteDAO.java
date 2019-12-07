@@ -126,7 +126,7 @@ public class clienteDAO extends ExecuteSQL{
           
       }
   }
-  public String Alterar_Client(Cliente a){
+  public String Alterar_Cliente(Cliente a){
       String sql = "update cliente set nome = ? ,data_nasc = ? ,rg = ? "
                     + ",cpf = ? ,email = ? ,telefone = ? ,bairro = ?,rua = ?"
                     +",numero = ?,cep = ? where idcliente = ?";
