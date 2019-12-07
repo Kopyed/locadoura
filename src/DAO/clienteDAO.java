@@ -155,5 +155,28 @@ public class clienteDAO extends ExecuteSQL{
   }
   
 
+  public List<Cliente> ListarComboCliente(){
+      
+      String sql = "select nome from cliente order by nome";
+      List<Cliente> lista = new ArrayList<>();
+      try{
+          PreparedStatement ps = getCon().preparedStatement(sql);
+          ResultSet rs = ps.executeQuery();
+          
+          if(rs != null){
+              while (rs.next()){
+                  
+                  Cliente a = new Cliente();
+                  a.setNome(rs.getString(1));
+                  lista.add(a);
+              }
+              return lista;
+          }else{
+              return null;
+          }
+      }catch(Exception e){
+          return null;
+      }
+  }
 }
 
