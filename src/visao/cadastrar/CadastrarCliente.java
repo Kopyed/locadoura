@@ -353,30 +353,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btSalvarActionPerformed
 
-        private void InserirDados(int cod){
-        
-        Connection con = conexao.AbrirConexao();
-        clienteDAO sql = new clienteDAO(con);
-        List<Cliente> lista = new ArrayList<>();
-        lista = sql.CapturarCliente(cod);
-        
-        for (Cliente a : lista){
-        
-                jTF_Codigo.setText("" + a.getCodigo());
-                jTF_Nome.setText(a.getNome());
-                jTF_CEP.setText(a.getCEP());
-                jTF_Codigo.setText("" + a.getNumero());
-                jTF_Bairro.setText(a.getBairro());
-                jTF_Email.setText(a.getEmail());
-                jTF_Telefone.setText(a.getTelefone());
-                jTF_Rua.setText(a.getRua());
-                jTF_Nascimento.setText(a.getNascimento());
-                jTF_RG.setText(a.getRG());
-                tfCPF.setText(a.getCPF());
-                
-        }
-        conexao.FecharConexao(con);
-    }
+      
     
     private void jTF_CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_CodigoActionPerformed
         // TODO add your handling code here:

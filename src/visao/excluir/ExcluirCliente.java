@@ -25,7 +25,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblcadastro = new javax.swing.JLabel();
         lblcadastro3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTF_codigo = new javax.swing.JTextField();
         jCB_Nome = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -35,7 +35,6 @@ public class ExcluirCliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblcadastro.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblcadastro.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro.setText("Excluir Cliente");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -56,7 +55,6 @@ public class ExcluirCliente extends javax.swing.JFrame {
         );
 
         lblcadastro3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro3.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro3.setText("Nome:");
 
         jCB_Nome.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +78,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(lblcadastro3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTF_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCB_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -97,7 +95,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTF_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCB_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -110,7 +108,18 @@ public class ExcluirCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCB_NomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_NomeActionPerformed
-        // TODO add your handling code here:
+        Connection con = conexao.AbrirConexao();
+        clienteDAO sql = new clienteDAO(con);
+        List<Cliente> lista = new ArrayList<>();
+        String nome = jCB_Nome.getSelectedItem().toString();
+        
+        lista = sql.ConsultaCodigoCliente(nome);
+        
+        for(Cliente b : lista){
+            int a = b.getCodigo();
+            jTF_codigo.setText(""+a);
+        }
+            conexao.FecharConexao(con);
     }//GEN-LAST:event_jCB_NomeActionPerformed
 
     /**
@@ -170,7 +179,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCB_Nome;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTF_codigo;
     private javax.swing.JLabel lblcadastro;
     private javax.swing.JLabel lblcadastro3;
     // End of variables declaration//GEN-END:variables
