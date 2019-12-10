@@ -38,12 +38,11 @@ public class CadastrarCategoria extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblcadastro.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblcadastro.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro.setText("Cadastro de Categoria");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -64,11 +63,9 @@ public class CadastrarCategoria extends javax.swing.JFrame {
         );
 
         lblcadastro2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro2.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro2.setText("Nome:");
 
         lblcadastro3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro3.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro3.setText("Codigo");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));

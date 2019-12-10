@@ -42,12 +42,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblcadastro.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblcadastro.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro.setText("Cadastro de funcionário");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -68,19 +67,15 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         );
 
         lblcadastro1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblcadastro1.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro1.setText("Codigo:");
 
         lblcadastro2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblcadastro2.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro2.setText("Nome:");
 
         lblcadastro3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblcadastro3.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro3.setText("Login:");
 
         lblcadastro4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblcadastro4.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro4.setText("Senha:");
 
         jButton1.setText("Limpar");

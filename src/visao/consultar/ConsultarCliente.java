@@ -59,7 +59,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Pesquisa por Nome:");
 
@@ -94,6 +94,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                 "Código", "Cliente", "RG", "CPF", "Telefone", "Email"
             }
         ));
+        jTable.setEnabled(false);
         jScrollPane1.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

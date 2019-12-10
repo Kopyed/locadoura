@@ -8,10 +8,10 @@
             <file>file:/C:/Users/paulo/Documents/NetBeansProject/SistemaLocadora/src/visao/cadastrar/CadastrarFuncionario.java</file>
         </group>
         <group>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/DAO/clienteDAO.java</file>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/visao/excluir/ExcluirCliente.java</file>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/visao/alterar/AlterarCliente.java</file>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/DAO/conexao.java</file>
+            <file>file:/C:/Users/pedro/Documents/NetBeansProjects/locadoura/src/visao/cadastrar/CadastrarFilme.java</file>
+            <file>file:/C:/Users/pedro/Documents/NetBeansProjects/locadoura/src/modelo/Filme.java</file>
+            <file>file:/C:/Users/pedro/Documents/NetBeansProjects/locadoura/src/DAO/clienteDAO.java</file>
+            <file>file:/C:/Users/pedro/Documents/NetBeansProjects/locadoura/src/visao/cadastrar/CadastrarCliente.java</file>
         </group>
     </open-files>
 </project-private>

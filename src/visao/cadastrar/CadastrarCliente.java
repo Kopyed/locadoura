@@ -50,7 +50,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jTF_CEP = new javax.swing.JFormattedTextField();
         jTF_Telefone = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Video Locadora");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
