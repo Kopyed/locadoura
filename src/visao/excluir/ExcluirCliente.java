@@ -6,6 +6,9 @@ import java.sql.Connection;
 import modelo.Cliente;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.Cliente;
+
 
 public class ExcluirCliente extends javax.swing.JFrame {
 
@@ -27,7 +30,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
         lblcadastro3 = new javax.swing.JLabel();
         jTF_codigo = new javax.swing.JTextField();
         jCB_Nome = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btExcluir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,7 +66,12 @@ public class ExcluirCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("ok");
+        btExcluir.setText("ok");
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -83,7 +91,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
                         .addComponent(jCB_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(41, Short.MAX_VALUE))
@@ -99,7 +107,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
                     .addComponent(jCB_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btExcluir)
                     .addComponent(jButton2))
                 .addGap(0, 39, Short.MAX_VALUE))
         );
@@ -121,6 +129,35 @@ public class ExcluirCliente extends javax.swing.JFrame {
         }
             conexao.FecharConexao(con);
     }//GEN-LAST:event_jCB_NomeActionPerformed
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        String codigo = jTF_codigo.getText();
+        String nome = jCB_Nome.getSelectedItem().toString();
+        
+        Connection con = conexao.AbrirConexao();
+        clienteDAO sql = new clienteDAO(con);
+        Cliente a = new Cliente();
+        if(nome.equals("")){
+            JOptionPane.showMessageDialog(null,"Nenhum nome selecionado",
+                    "Video Locadora",JOptionPane.WARNING_MESSAGE);
+        }else{
+        
+        int b = JOptionPane.showConfirmDialog(null,"Deseja realmente Excluir"
+        +"\n ("+ codigo +") ("+ nome +")", "Video Locadora",
+        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        
+            if(b == 0){
+                int cod = Integer.parseInt(codigo);
+                a.setNome(nome);
+                a.setCodigo(cod);
+                sql.Excluir_Cliente(a);
+                conexao.FecharConexao(con);
+                dispose();
+            }
+        
+        
+        }
+    }//GEN-LAST:event_btExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,7 +212,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btExcluir;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCB_Nome;
     private javax.swing.JPanel jPanel1;

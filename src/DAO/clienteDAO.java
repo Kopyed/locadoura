@@ -24,6 +24,7 @@ public class clienteDAO extends ExecuteSQL{
            ps.setString(5, a.getEmail());
            ps.setString(6, a.getTelefone());
            ps.setString(7, a.getBairro());
+        
            ps.setString(8, a.getRua());
            ps.setInt(9, a.getNumero());
            ps.setString(10, a.getCEP());
@@ -46,6 +47,7 @@ public class clienteDAO extends ExecuteSQL{
             ResultSet rs = ps.executeQuery();
             
             if(rs != null){
+           
                 while(rs.next()){
                     Cliente a = new Cliente();
                     a.setCodigo(rs.getInt(1));
@@ -68,7 +70,8 @@ public class clienteDAO extends ExecuteSQL{
  }
  
   public List<Cliente> Pesquisar_Cod_Cliente(int cod){
-      String sql = "select idcliente, Nome , RG, CPF, Telefone, Email"
+      String sql
+              = "select idcliente, Nome , RG, CPF, Telefone, Email"
               +" from cliente where idcliente = '"+cod+"'";
         return null;
   }
@@ -91,6 +94,7 @@ public class clienteDAO extends ExecuteSQL{
       }catch(SQLException ex){
           ex.getMessage();
       }
+      
         return Resultado;
       
   }
@@ -112,6 +116,7 @@ public class clienteDAO extends ExecuteSQL{
                   a.setEmail(rs.getString(6));
                   a.setTelefone(rs.getString(7));
                   a.setBairro(rs.getString(8));
+      
                   a.setRua(rs.getString(9));
                   a.setNumero(rs.getInt(10));
                   a.setCEP(rs.getString(11));
@@ -157,6 +162,7 @@ public class clienteDAO extends ExecuteSQL{
 
   public List<Cliente> ListarComboCliente(){
       
+      
       String sql = "select nome from cliente order by nome";
       List<Cliente> lista = new ArrayList<>();
       try{
@@ -179,6 +185,7 @@ public class clienteDAO extends ExecuteSQL{
       }
   }
   
+  
   public List<Cliente> ConsultaCodigoCliente(String nome){
       
       String sql = "select idcliente from cliente where nome = '"+nome+"'";
@@ -200,6 +207,7 @@ public class clienteDAO extends ExecuteSQL{
           }
       } catch(Exception e){
           return null;
+  
       }
   }
   
@@ -220,4 +228,228 @@ public class clienteDAO extends ExecuteSQL{
       }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
