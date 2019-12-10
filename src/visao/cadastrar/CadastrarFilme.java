@@ -7,8 +7,11 @@ package visao.cadastrar;
 
 import DAO.clienteDAO;
 import DAO.conexao;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import modelo.Filme;
 
@@ -57,7 +60,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         btCadastrar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        lbCapa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +113,11 @@ public class CadastrarFilme extends javax.swing.JFrame {
         jLabel7.setText("Capa:");
 
         btCapa.setText("OK");
+        btCapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCapaActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
 
@@ -148,7 +156,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        jLabel8.setText("DVD VIDEO");
+        lbCapa.setText("DVD VIDEO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,7 +202,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTF_Duracao, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                                .addComponent(jLabel8)))))
+                                .addComponent(lbCapa)))))
                 .addGap(52, 52, 52))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -225,7 +233,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
                             .addComponent(jCB_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addComponent(lbCapa)
                         .addGap(15, 15, 15)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -253,57 +261,25 @@ public class CadastrarFilme extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
-       String titulo = jTF_Codigo.getText("");
-        
-        if(nome.equals("") || nascimento.equals("") || cep.equals("")  
-            || rua.equals("") || numero.equals("") || bairro.equals("")
-            || fone.equals("") || rg.equals("") )   
-             {
-               JOptionPane.showMessageDialog(null, "Nenhum Campo pode estar vazio ","Video Locadora",
-                       JOptionPane.WARNING_MESSAGE);
-        }else{
-                Connection con = conexao.AbrirConexao();
-                clienteDAO sql = new clienteDAO(con);
-                int n = Integer.parseInt(numero);
-                Cliente a = new Cliente();
-                
-                a.setNome(nome);
-                a.setNascimento(nascimento);
-                a.setCEP(cep);
-                a.setRua(rua);
-                a.setNumero(n);
-                a.setBairro(bairro);
-                a.setEmail(email);
-                a.setTelefone(fone);
-                a.setCPF(cpf);
-                a.setRG(rg);
-                
-           
-            try { 
-                sql.Inserir_Cliente(a);
-                conexao.FecharConexao(con);
-                
-                jTF_Nome.setText("");
-                jTF_CEP.setText("");
-                jTF_Codigo.setText("");
-                jTF_Bairro.setText("");
-                jTF_Email.setText("");
-                jTF_Telefone.setText("");
-                jTF_Rua.setText("");
-                jTF_Nascimento.setText("");
-                jTF_RG.setText("");
-                tfCPF.setText("");
-                JOptionPane.showMessageDialog(null, "cadastro Realizado com Sucesso",
-                        "Video Locadora",JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-            } catch (SQLException ex) {
-               
-            }
-        }
-        
-    }                                        
+                         
 
     }//GEN-LAST:event_btCadastrarActionPerformed
+
+    private void btCapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapaActionPerformed
+        try{
+            JFileChooser foto = new JFileChooser();
+            foto.setCurrentDirectory(new File("/C:/Video Locadora/Pictures/"));
+            foto.setDialogTitle("Carregar Capa");
+            foto.showOpenDialog(this);
+            String a = "" + foto.getSelectedFile().getName();
+            jTF_Capa.setText(a);
+            lbCapa.setIcon(new ImageIcon
+        ("/C:/Video Locadora/Pictures/"+jTF_Capa.getText() + "/"));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Não foi possivel carregar capa");
+        }
+
+    }//GEN-LAST:event_btCapaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,7 +330,6 @@ public class CadastrarFilme extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTF_Ano;
@@ -364,6 +339,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
     private javax.swing.JTextField jTF_Codigo;
     private javax.swing.JTextField jTF_Duracao;
     private javax.swing.JTextField jTF_titulo;
+    private javax.swing.JLabel lbCapa;
     private javax.swing.JLabel lblcadastro;
     // End of variables declaration//GEN-END:variables
 }
