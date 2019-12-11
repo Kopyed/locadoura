@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package principal;
 
 import DAO.FuncionarioDAO;
@@ -43,8 +39,8 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btEntrar = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,9 +60,14 @@ public class Login extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/img.jpg"))); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaoEntrar.png"))); // NOI18N
+        btEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaoEntrar.png"))); // NOI18N
+        btEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEntrarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaoSair.png"))); // NOI18N
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaoSair.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,9 +85,9 @@ public class Login extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tfUsuario)
                             .addComponent(pfSenha))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -113,8 +114,8 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(lblusuario1))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(btEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
@@ -125,6 +126,43 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
+        Connection con = conexao.AbrirConexao();
+        FuncionarioDAO sql = new FuncionarioDAO(con);
+        String login = tfUsuario.getText();
+        String senha = pfSenha.getText();
+        if(login.equalsIgnoreCase("") || senha.equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio"
+                    ,"Video Locadora", JOptionPane.WARNING_MESSAGE );
+            tfUsuario.setText("");
+            pfSenha.setText("");
+               
+        }else{
+            if(sql.Logar(login, senha) ==  true){
+                    new Thread(){
+                        public void run(){
+                            for(int i = 0; i < 101 ; i++){
+                                jProgressBar2.setValue(i);
+                                try {
+                                    Thread.sleep(35);
+                                }catch(Exception ex){
+                                    ex.getMessage();
+                                }                                
+                            }
+                            new Menu().setVisible(true);
+                            dispose();
+                    }
+                    }.start();
+            }else {
+                  JOptionPane.showMessageDialog(null,"Usuário ou senha Invalidos"
+                        ,"Video Locadora",JOptionPane.ERROR_MESSAGE);
+                  tfUsuario.setText("");
+                  pfSenha.setText("");
+                  
+            }
+        }
+    }//GEN-LAST:event_btEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,8 +200,8 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btEntrar;
+    private javax.swing.JButton btSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

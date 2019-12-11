@@ -1,5 +1,6 @@
 package visao.alterar;
 
+import principal.Menu;
 import DAO.clienteDAO;
 import DAO.conexao;
 import java.sql.*;
@@ -208,17 +209,19 @@ public class AlterarCliente extends javax.swing.JFrame {
                     .addComponent(lblcadastro5)
                     .addComponent(jTF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblcadastro7))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblcadastro7))
                         .addGap(17, 17, 17)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblcadastro6)
                             .addComponent(lblcadastro8)
                             .addComponent(jTF_RG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jTF_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTF_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro9)
@@ -254,6 +257,11 @@ public class AlterarCliente extends javax.swing.JFrame {
         });
 
         jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -314,7 +322,7 @@ public class AlterarCliente extends javax.swing.JFrame {
                 jTF_Codigo.setText("" + a.getCodigo());
                 jTF_Nome.setText(a.getNome());
                 jTF_CEP.setText(a.getCEP());
-                jTF_Codigo.setText("" + a.getNumero());
+                jTF_Numero.setText("" + a.getNumero());
                 jTF_Bairro.setText(a.getBairro());
                 jTF_Email.setText(a.getEmail());
                 jTF_Telefone.setText(a.getTelefone());
@@ -402,6 +410,7 @@ public class AlterarCliente extends javax.swing.JFrame {
             sql.Alterar_Cliente(a);
             conexao.FecharConexao(con);
             
+            jTF_Codigo.setText("");            
             jTF_Nome.setText("");
             jTF_CEP.setText("");
             jTF_Numero.setText("");
@@ -412,13 +421,20 @@ public class AlterarCliente extends javax.swing.JFrame {
             jTF_Nascimento.setText("");
             jTF_RG.setText("");
             jTF_CPF.setText("");
-            JOptionPane.showMessageDialog(null,"Cadastro Realizado com Sucesso",
+            JOptionPane.showMessageDialog(null,"Atualizado com Sucesso",
                      "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
+            new Menu().setVisible(true);
             dispose();
         }
         
         
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new Menu().setVisible(true);
+        dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

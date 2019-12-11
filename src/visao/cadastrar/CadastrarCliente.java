@@ -356,7 +356,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
       
     
     private void jTF_CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_CodigoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTF_CodigoActionPerformed
 
     private void jTF_TelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_TelefoneActionPerformed

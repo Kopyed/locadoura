@@ -14,6 +14,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
 
     public ExcluirCliente() {
         initComponents();
+        AtualizaCombo();
     }
 
     /**
@@ -152,7 +153,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
                 a.setCodigo(cod);
                 sql.Excluir_Cliente(a);
                 conexao.FecharConexao(con);
-                dispose();
+                
             }
         
         
