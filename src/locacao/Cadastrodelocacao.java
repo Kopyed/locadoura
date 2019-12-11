@@ -8,6 +8,7 @@ package locacao;
 import DAO.DVDDAO;
 import java.sql.*;
 import DAO.conexao;
+import java.text.SimpleDateFormat;
 import javax.swing.*;
 import java.util.Date;
 import modelo.DVD;
@@ -21,9 +22,30 @@ import modelo.Filme;
  */
 public class Cadastrodelocacao extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Cadastrodelocacao
-     */
+    private void InserirDados(int cod){
+        
+        Connection con = conexao.AbrirConexao();
+        DVDDAO sql = new DVDDAO(con);
+        List<DVD> lista = new ArrayList<>();
+        lista = sql.CapturarDVD(cod);
+        
+        for (DVD a : lista){
+        
+                jTF_Codigo.setText("" + a.getCodigo());
+                jTF_CodDVD.setText(a.getcod_filme());
+                jTF_Titulo.setText(a.gettitulo());
+                jTF_Numero.setText("" + a.getNumero());
+                jTF_Bairro.setText(a.getBairro());
+                jTF_Email.setText(a.getEmail());
+                jTF_Telefone.setText(a.getTelefone());
+                jTF_Rua.setText(a.getRua());
+                jTF_Nascimento.setText(a.getNascimento());
+                jTF_RG.setText(a.getRG());
+                jTF_CPF.setText(a.getCPF());
+                
+        }
+        conexao.FecharConexao(con);
+    }
     public Cadastrodelocacao() {
         initComponents();
     }
@@ -386,6 +408,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton23ActionPerformed
 
+    
     private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
         String pesquisa = jTF_CodDVD.getText();
         Connection con = conexao.AbrirConexao();
@@ -495,10 +518,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
            return null;
            
        }
-          
-     }
-    
-   
+           
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
