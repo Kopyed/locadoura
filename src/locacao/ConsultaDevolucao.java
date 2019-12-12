@@ -86,6 +86,8 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
         a.setCoddvd(iddvd);
         a.setCodaluguel(idaluguel);
         a.setCodcliente(idcliente);
+        
+        new EFetuarDevolucao().setVisible(true); 
     }//GEN-LAST:event_jTableMouseClicked
 
     /**

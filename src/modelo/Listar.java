@@ -2,8 +2,9 @@ package modelo;
 
 public class Listar {
     
-    static private int coddvd;
-    static private int codaluguel;
-    static private int codcliente;
+    static public int coddvd;
+    static public int codaluguel;
+    static public int codcliente;
 
+   
 }
