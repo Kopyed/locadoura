@@ -5,6 +5,13 @@
  */
 package visao.cadastrar;
 
+import DAO.categoriaDAO;
+import DAO.conexao;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import modelo.Cliente;
+
 /**
  *
  * @author paulo
@@ -32,10 +39,10 @@ public class CadastrarCategoria extends javax.swing.JFrame {
         lblcadastro2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         lblcadastro3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTF_Nome = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -65,6 +72,8 @@ public class CadastrarCategoria extends javax.swing.JFrame {
         lblcadastro2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblcadastro2.setText("Nome:");
 
+        jTextField1.setEditable(false);
+
         lblcadastro3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblcadastro3.setText("Codigo");
 
@@ -72,15 +81,25 @@ public class CadastrarCategoria extends javax.swing.JFrame {
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
 
         jButton1.setText("Limpar");
-
-        jButton2.setText("Cadastrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btSalvar.setText("Cadastrar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
             }
         });
 
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -90,7 +109,7 @@ public class CadastrarCategoria extends javax.swing.JFrame {
                 .addGap(77, 77, 77)
                 .addComponent(jButton1)
                 .addGap(28, 28, 28)
-                .addComponent(jButton2)
+                .addComponent(btSalvar)
                 .addGap(30, 30, 30)
                 .addComponent(jButton3)
                 .addContainerGap(82, Short.MAX_VALUE))
@@ -101,7 +120,7 @@ public class CadastrarCategoria extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(btSalvar)
                     .addComponent(jButton3))
                 .addContainerGap())
         );
@@ -117,7 +136,7 @@ public class CadastrarCategoria extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))
+                    .addComponent(jTF_Nome, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +154,7 @@ public class CadastrarCategoria extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,9 +167,42 @@ public class CadastrarCategoria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        String nome = jTF_Nome.getText();
+        if(nome.equals("") )   
+             {
+               JOptionPane.showMessageDialog(null, "O Campo não pode estar vazio ","Video Locadora",
+                       JOptionPane.WARNING_MESSAGE);
+        }else{
+                Connection con = conexao.AbrirConexao();
+                categoriaDAO sql = new categoriaDAO(con);
+                Cliente a = new Cliente();
+                
+                a.setNome(nome);
+               
+           
+            try { 
+                sql.Inserir_Categoria(a);
+                conexao.FecharConexao(con);
+                
+                jTF_Nome.setText("");
+              
+                JOptionPane.showMessageDialog(null, "cadastro Realizado com Sucesso",
+                        "Video Locadora",JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } catch (SQLException ex) {
+               
+            }
+        }
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            jTF_Nome.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+            dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,13 +240,13 @@ public class CadastrarCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSalvar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTF_Nome;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblcadastro;
     private javax.swing.JLabel lblcadastro2;
     private javax.swing.JLabel lblcadastro3;

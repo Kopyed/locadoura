@@ -4,7 +4,7 @@ public class Categoria {
 
 //atributos 
 private int codigo;
-private int nome;
+private String nome;
     
 //metodos getters e setters
     public int getCodigo() {
@@ -15,11 +15,11 @@ private int nome;
         this.codigo = codigo;
     }
 
-    public int getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(int nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
