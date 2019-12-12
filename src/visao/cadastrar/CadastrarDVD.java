@@ -41,7 +41,7 @@ public class CadastrarDVD extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -91,7 +91,12 @@ public class CadastrarDVD extends javax.swing.JFrame {
 
         jButton1.setText("Limpar");
 
-        jButton2.setText("Cadastrar");
+        btSalvar.setText("Cadastrar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cancelar");
 
@@ -103,7 +108,7 @@ public class CadastrarDVD extends javax.swing.JFrame {
                 .addGap(78, 78, 78)
                 .addComponent(jButton1)
                 .addGap(84, 84, 84)
-                .addComponent(jButton2)
+                .addComponent(btSalvar)
                 .addGap(89, 89, 89)
                 .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -113,7 +118,7 @@ public class CadastrarDVD extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(btSalvar)
                     .addComponent(jButton3))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
@@ -190,6 +195,10 @@ public class CadastrarDVD extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btSalvarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -226,8 +235,8 @@ public class CadastrarDVD extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSalvar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
