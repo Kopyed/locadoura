@@ -5,10 +5,16 @@
  */
 package DAO;
 
+import java.sql.Connection;
+
 /**
  *
  * @author paulo
  */
 public class AluguelDAO {
+
+    public AluguelDAO(Connection con) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

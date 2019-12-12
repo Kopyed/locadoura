@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.Filme;
 import java.sql.*;
+import modelo.DVD;
 
 /**
  *
@@ -47,4 +48,5 @@ public class FilmeDAO extends ExecuteSQL{
             return null;
         }
         }
+   
 }

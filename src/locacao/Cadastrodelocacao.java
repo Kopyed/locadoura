@@ -5,7 +5,10 @@
  */
 package locacao;
 
+import DAO.AluguelDAO;
 import DAO.DVDDAO;
+import DAO.FilmeDAO;
+import DAO.classificacaoDAO;
 import java.sql.*;
 import DAO.conexao;
 import java.text.SimpleDateFormat;
@@ -14,6 +17,8 @@ import java.util.Date;
 import modelo.DVD;
 import java.util.List;
 import java.util.ArrayList;
+import modelo.Aluguel;
+import modelo.Classificacao;
 import modelo.Filme;
 
 /**
@@ -77,16 +82,16 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTF_Valor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTF_Cliente = new javax.swing.JTextField();
+        jTF_CodCliente = new javax.swing.JTextField();
         jCB_Cliente = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jTF_DataLocacao = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        jDateDevolucao = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btCadastrar = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jLbFoto = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -149,7 +154,12 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
 
         jButton3.setText("Limpar");
 
-        jButton4.setText("Cadastrar");
+        btCadastrar.setText("Cadastrar");
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastrarActionPerformed(evt);
+            }
+        });
 
         jButton20.setText("Cancelar");
 
@@ -161,7 +171,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
                 .addGap(130, 130, 130)
                 .addComponent(jButton3)
                 .addGap(96, 96, 96)
-                .addComponent(jButton4)
+                .addComponent(btCadastrar)
                 .addGap(87, 87, 87)
                 .addComponent(jButton20)
                 .addContainerGap(231, Short.MAX_VALUE))
@@ -171,7 +181,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
+                    .addComponent(btCadastrar)
                     .addComponent(jButton3)
                     .addComponent(jButton20))
                 .addContainerGap())
@@ -210,7 +220,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTF_Categoria, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                            .addComponent(jTF_Cliente))
+                            .addComponent(jTF_CodCliente))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
@@ -231,7 +241,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField10)
+                        .addComponent(jDateDevolucao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(38, 38, 38)
@@ -267,14 +277,14 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTF_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTF_CodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCB_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jTF_DataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -450,6 +460,38 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
         conexao.FecharConexao(con);
     }//GEN-LAST:event_btOKActionPerformed
 
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+        String dvd = jTF_Codigo.getText();
+        String cliente = jTF_CodCliente.getText();
+        String horario = jTF_Horas.getText();
+        String aluguel = jTF_DataLocacao.getText();
+        
+        if(dvd.equals("") || cliente.equals("") || jDateDevolucao.equals("") ){
+            JOptionPane.showInputDialog(null,"Nenhum campo pode estar vazio"
+                    + "Video Locadora",JOptionPane.WARNING_MESSAGE);
+                
+        }else{
+        String devolucao = new SimpleDateFormat("dd/MM/yyyy").format(jDateDevolucao.getDate());    
+            Connection con = conexao.AbrirConexao();
+            AluguelDAO sql = new AluguelDAO(con);
+            int coddvd = Integer.parseInt(dvd);
+            int codcli = Integer.parseInt(cliente);
+            Aluguel a = new Aluguel();
+            a.setCoddvd(coddvd);
+            a.setCodcliente(codcli);
+            a.setHorario(horario);
+            a.setData_aluguel(aluguel);
+            a.setData_devolucao(devolucao);
+            sql.Inserir_Aluguel(a);
+            String situacao = "emprestado" ;
+            sql.Atualizar_Situacao(situacao, coddvd);
+            conexao.FecharConexao(con);
+            
+            JOptionPane.showMessageDialog(null,"Cadastro Realizado com Sucesso"
+                    ,"Video Locadora",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btCadastrarActionPerformed
+
     public void AtualizaDate(){
     
         Date date = new Date();
@@ -520,8 +562,38 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
        }
            
     }
+      public void InserirDados(int cod){
+     
+         Connection con = conexao.AbrirConexao();
+         DVDDAO dvd = new DVDDAO(con);
+         FilmeDAO filme = new FilmeDAO(con);
+         List<DVD> listaDVD = new ArrayList<>();
+         List<Filme> listaFIL = new ArrayList<>();
+         listaDVD = dvd.ListarCodFilme(cod);
+         for (DVD a: listaDVD ){
+             int codigo = a.getCod_Filme();
+             listaFIL = filme.Pesquisar_Cod_Filme(codigo);
+         }for(Filme a: listaFIL){
+             jTF_Titulo.setText(a.getTitulo());
+             jTF_Categoria.setText(""+a.getCod_categoria());
+             jTF_Classificacao.setText(""+a.getCod_classificao());
+             jLbFoto.setIcon(new ImageIcon("/C:/Video Locadora/Pictures/"
+                     + a.getCapa()+ "/")) ;           
+         }
+          classificacaoDAO cla = new classificacaoDAO(con);
+          List<Classificacao> listaCLA = new ArrayList();
+          String b = jTF_Classificacao.getText();
+          int codigo = Integer.parseInt(b);
+          listaCLA = cla.ListarPrecoClassificacao(codigo);
+          for (Classificacao a: listaCLA){          
+              double preco = a.getPreco();
+              jTF_Valor.setText("" + preco + "0");            
+          }
+          conexao.FecharConexao(con);
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btOK;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
@@ -529,9 +601,9 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jCB_Cliente;
+    private javax.swing.JTextField jDateDevolucao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -552,7 +624,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTF_Categoria;
     private javax.swing.JTextField jTF_Classificacao;
-    private javax.swing.JTextField jTF_Cliente;
+    private javax.swing.JTextField jTF_CodCliente;
     private javax.swing.JTextField jTF_CodDVD;
     private javax.swing.JTextField jTF_Codigo;
     private javax.swing.JTextField jTF_DataLocacao;
@@ -561,7 +633,6 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
     private javax.swing.JTextField jTF_Valor;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;

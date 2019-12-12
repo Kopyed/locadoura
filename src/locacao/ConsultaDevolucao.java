@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package locacao;
 
-/**
- *
- * @author paulo
- */
+import modelo.Listar;
+
+
 public class ConsultaDevolucao extends javax.swing.JFrame {
 
     /**
@@ -29,14 +24,14 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
 
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel4.setText("Cliente:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -44,7 +39,12 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
                 "Código", "Cliente", "DVD", "Horario", "Locação", "Devolução"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,6 +76,17 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        Integer linha = jTable.getSelectedRow();
+        Integer idalguel = (Integer) jTable.getValueAt(linha, 0);
+        Integer idcliente = (Integer) jTable.getValueAt(linha , 1);
+        Integer iddvd = (Integer) jTable.getValueAt(linha , 2);
+        Listar a = new Listar();
+        a.setCoddvd(iddvd);
+        a.setCodaluguel(idaluguel);
+        a.setCodcliente(idcliente);
+    }//GEN-LAST:event_jTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -116,6 +127,6 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }

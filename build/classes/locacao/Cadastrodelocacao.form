@@ -96,7 +96,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTF_Categoria" pref="46" max="32767" attributes="0"/>
-                                  <Component id="jTF_Cliente" max="32767" attributes="0"/>
+                                  <Component id="jTF_CodCliente" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -122,7 +122,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField10" max="32767" attributes="0"/>
+                              <Component id="jDateDevolucao" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton2" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
@@ -165,7 +165,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTF_Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTF_CodCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jCB_Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -173,7 +173,7 @@
                                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTF_DataLocacao" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jDateDevolucao" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -249,7 +249,7 @@
                 <Property name="text" type="java.lang.String" value="Cliente:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTF_Cliente">
+            <Component class="javax.swing.JTextField" name="jTF_CodCliente">
             </Component>
             <Component class="javax.swing.JComboBox" name="jCB_Cliente">
               <Properties>
@@ -276,7 +276,7 @@
                 <Property name="text" type="java.lang.String" value="Data de devolu&#xe7;&#xe3;o"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField10">
+            <Component class="javax.swing.JTextField" name="jDateDevolucao">
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
             </Component>
@@ -294,7 +294,7 @@
                           <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
                           <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                          <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                          <Component id="btCadastrar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                           <Component id="jButton20" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="231" max="32767" attributes="0"/>
@@ -306,7 +306,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton20" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -321,10 +321,13 @@
                     <Property name="text" type="java.lang.String" value="Limpar"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton4">
+                <Component class="javax.swing.JButton" name="btCadastrar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cadastrar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastrarActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton20">
                   <Properties>
