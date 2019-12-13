@@ -79,7 +79,7 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         Integer linha = jTable.getSelectedRow();
-        Integer idalguel = (Integer) jTable.getValueAt(linha, 0);
+        Integer idaluguel = (Integer) jTable.getValueAt(linha, 0);
         Integer idcliente = (Integer) jTable.getValueAt(linha , 1);
         Integer iddvd = (Integer) jTable.getValueAt(linha , 2);
         Listar a = new Listar();

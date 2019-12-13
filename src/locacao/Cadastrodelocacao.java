@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package locacao;
 
 import DAO.AluguelDAO;
@@ -17,6 +12,8 @@ import java.util.Date;
 import modelo.DVD;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Aluguel;
 import modelo.Classificacao;
 import modelo.Filme;
@@ -27,30 +24,7 @@ import modelo.Filme;
  */
 public class Cadastrodelocacao extends javax.swing.JFrame {
 
-    private void InserirDados(int cod){
-        
-        Connection con = conexao.AbrirConexao();
-        DVDDAO sql = new DVDDAO(con);
-        List<DVD> lista = new ArrayList<>();
-        lista = sql.CapturarDVD(cod);
-        
-        for (DVD a : lista){
-        
-                jTF_Codigo.setText("" + a.getCodigo());
-                jTF_CodDVD.setText(a.getcod_filme());
-                jTF_Titulo.setText(a.gettitulo());
-                jTF_Numero.setText("" + a.getNumero());
-                jTF_Bairro.setText(a.getBairro());
-                jTF_Email.setText(a.getEmail());
-                jTF_Telefone.setText(a.getTelefone());
-                jTF_Rua.setText(a.getRua());
-                jTF_Nascimento.setText(a.getNascimento());
-                jTF_RG.setText(a.getRG());
-                jTF_CPF.setText(a.getCPF());
-                
-        }
-        conexao.FecharConexao(con);
-    }
+    
     public Cadastrodelocacao() {
         initComponents();
     }
@@ -87,13 +61,12 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTF_DataLocacao = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jDateDevolucao = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         btCadastrar = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jLbFoto = new javax.swing.JLabel();
+        jDateDevolucao = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
@@ -132,6 +105,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
 
         jLabel2.setText("Horas:");
 
+        jTF_Horas.setEditable(false);
         jTF_Horas.setText("10:51");
 
         jLabel3.setText("Titulo:");
@@ -241,9 +215,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateDevolucao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jDateDevolucao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(38, 38, 38)
                 .addComponent(jLbFoto)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -280,12 +252,12 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
                             .addComponent(jTF_CodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCB_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTF_DataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(jDateDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(jTF_DataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9))
+                            .addComponent(jDateDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLbFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -414,6 +386,9 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton22ActionPerformed
 
+    public void con(){
+                  Connection con = conexao.AbrirConexao();
+    }
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton23ActionPerformed
@@ -482,7 +457,11 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
             a.setHorario(horario);
             a.setData_aluguel(aluguel);
             a.setData_devolucao(devolucao);
-            sql.Inserir_Aluguel(a);
+            try {
+                sql.Inserir_Aluguel(a);
+            } catch (SQLException ex) {
+
+            }
             String situacao = "emprestado" ;
             sql.Atualizar_Situacao(situacao, coddvd);
             conexao.FecharConexao(con);
@@ -540,7 +519,9 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
           String sql = "select idfilme from dvd where iddvd = " + cod + "";  
           List<DVD> lista = new ArrayList<>();
           
+          
           try{
+              Connection con = conexao.AbrirConexao();
               PreparedStatement ps = getCon().prepareStatement(sql);
               ResultSet rs = ps.executeQuery();
           
@@ -595,7 +576,6 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btOK;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
@@ -603,7 +583,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jCB_Cliente;
-    private javax.swing.JTextField jDateDevolucao;
+    private com.toedter.calendar.JDateChooser jDateDevolucao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
