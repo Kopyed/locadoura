@@ -5,7 +5,7 @@
  */
 package visao.cadastrar;
 
-import DAO.clienteDAO;
+import DAO.FilmeDAO;
 import DAO.conexao;
 import java.io.File;
 import java.sql.Connection;
@@ -58,7 +58,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
         btCapa = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        btCadastrar = new javax.swing.JButton();
+        btOK = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         lbCapa = new javax.swing.JLabel();
 
@@ -123,10 +123,10 @@ public class CadastrarFilme extends javax.swing.JFrame {
 
         jButton2.setText("Limpar");
 
-        btCadastrar.setText("Cadastrar");
-        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btOK.setText("Cadastrar");
+        btOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadastrarActionPerformed(evt);
+                btOKActionPerformed(evt);
             }
         });
 
@@ -140,7 +140,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
                 .addGap(87, 87, 87)
                 .addComponent(jButton2)
                 .addGap(85, 85, 85)
-                .addComponent(btCadastrar)
+                .addComponent(btOK)
                 .addGap(74, 74, 74)
                 .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -151,7 +151,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(btCadastrar)
+                    .addComponent(btOK)
                     .addComponent(jButton4))
                 .addGap(22, 22, 22))
         );
@@ -259,11 +259,53 @@ public class CadastrarFilme extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCB_ClassificacaoActionPerformed
 
-    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-
-                         
-
-    }//GEN-LAST:event_btCadastrarActionPerformed
+    private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
+        String titulo = jTF_titulo.getText();
+        String ano = jTF_Ano.getText();
+        String duracao = jTF_Duracao.getText();
+        String categoria = jTF_Categoria.getText();
+        String classificacao = jTF_Classificacao.getText();
+        String capa = jTF_Capa.getText();
+        
+        if(titulo.equals("") || ano.equals("") || duracao.equals("")  
+            || categoria.equals("") || classificacao.equals("") || capa.equals(""))   
+             {
+               JOptionPane.showMessageDialog(null, "Nenhum Campo pode estar vazio ","Video Locadora",
+                       JOptionPane.WARNING_MESSAGE);
+        }else{
+                Connection con = conexao.AbrirConexao();
+                FilmeDAO sql = new FilmeDAO(con);
+                int n = Integer.parseInt(ano);
+                int c = Integer.parseInt(categoria);
+                int v = Integer.parseInt(classificacao);
+                Filme a = new Filme();
+                
+                a.setTitulo(titulo);
+                a.setDuracao(duracao);
+                a.setCod_categoria(c);
+                a.setAno(n);
+                a.setCod_classificao(v);
+                a.setCapa(capa);
+                
+           
+            try { 
+                sql.Inserir_Filme(a);
+                conexao.FecharConexao(con);
+                
+                jTF_Codigo.setText("");
+                jTF_titulo.setText("");
+                jTF_Ano.setText("");
+                jTF_Duracao.setText("");
+                jTF_Classificacao.setText("");
+                jTF_Capa.setText("");
+                JOptionPane.showMessageDialog(null, "cadastro Realizado com Sucesso",
+                        "Video Locadora",JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } catch (SQLException ex) {
+               
+            }
+        }
+    }//GEN-LAST:event_btOKActionPerformed
 
     private void btCapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapaActionPerformed
         try{
@@ -317,8 +359,8 @@ public class CadastrarFilme extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btCapa;
+    private javax.swing.JButton btOK;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCB_Categoria;

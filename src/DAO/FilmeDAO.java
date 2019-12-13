@@ -1,4 +1,3 @@
-
 package DAO;
 
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class FilmeDAO extends ExecuteSQL{
         }
         }
        public String Inserir_Filme(Filme a) throws SQLException{
-       String sql = "insert into filme values(0,?,?,?,?,?,?)";
+       String sql = "insert into filme values(?,?,?,?,?,?,?)";
        try{
            PreparedStatement ps = getCon().prepareStatement(sql);
            
@@ -55,6 +54,7 @@ public class FilmeDAO extends ExecuteSQL{
            ps.setString(4,a.getDuracao());
            ps.setInt(5,a.getCod_categoria());
            ps.setInt(6,a.getCod_classificao());
+           ps.setString(7,a.getCapa());
            
            
            if (ps.executeUpdate() > 0){
@@ -144,9 +144,8 @@ public class FilmeDAO extends ExecuteSQL{
       }
   }
   public String Alterar_Filme(Filme a){
-      String sql = "update cliente set nome = ? ,data_nasc = ? ,rg = ? "
-                    + ",cpf = ? ,email = ? ,telefone = ? ,bairro = ?,rua = ?"
-                    +",numero = ?,cep = ? where idcliente = ?";
+      String sql = "update filme set titulo = ? ,ano = ? ,duracao = ? "
+                    + ",idcategoria = ? ,classificacao = ? , capa = ?  where idcliente = ?";
       try{
           PreparedStatement ps = getCon().prepareStatement(sql);
           ps.setInt(1, a.getCodigo());
@@ -188,9 +187,9 @@ public class FilmeDAO extends ExecuteSQL{
   }
   
   
-  public List<Filme> ConsultaCodigoFilme(String nome){
+  public List<Filme> ConsultaCodigoFilme(String titulo){
       
-      String sql = "select idcliente from cliente where nome = '"+nome+"'";
+      String sql = "select idcliente from cliente where titulo = '" + titulo + "'";
       List<Filme> lista = new ArrayList<>();
       try{
           PreparedStatement ps = getCon().prepareStatement(sql);
@@ -214,7 +213,7 @@ public class FilmeDAO extends ExecuteSQL{
   }
   
   public String Excluir_Filme(Filme a){
-      String sql = "delete from cliente where idcliente = ? and nome = ?";
+      String sql = "delete from filme where idfilme = ?" ;
       
       try{
           PreparedStatement ps = getCon().prepareStatement(sql);
