@@ -66,7 +66,7 @@ public class classificacaoDAO extends ExecuteSQL {
         return null;
   }
   
-  public boolean Testar_Cliente(int cod){
+  public boolean Testar_Classificacao(int cod){
       boolean Resultado = false;
       try{
       
@@ -114,8 +114,8 @@ public class classificacaoDAO extends ExecuteSQL {
       }
   }
   public String Alterar_Classificacao(Classificacao a){
-      String sql = "update classificacao set codigo = ? ,nome = ? , preco = ? "
-                    +", where idcliente = ?";
+      String sql = "update classificacao set idclassificacao = ? ,set nome = ? , set preco = ? "
+                    +", where idclassificacao = ? ";
       try{
           PreparedStatement ps = getCon().prepareStatement(sql);
           ps.setString(1, a.getNome());

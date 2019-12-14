@@ -6,13 +6,17 @@
 package visao.cadastrar;
 
 import DAO.FilmeDAO;
+import DAO.categoriaDAO;
 import DAO.conexao;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import modelo.Categoria;
 import modelo.Filme;
 
 /**
@@ -73,17 +77,17 @@ public class CadastrarFilme extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(216, 216, 216)
                 .addComponent(lblcadastro)
-                .addGap(219, 219, 219))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
                 .addComponent(lblcadastro)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Código:");
@@ -201,7 +205,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTF_Duracao, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                                 .addComponent(lbCapa)))))
                 .addGap(52, 52, 52))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -252,7 +256,18 @@ public class CadastrarFilme extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCB_CategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_CategoriaActionPerformed
-        // TODO add your handling code here:
+        Connection con = conexao.AbrirConexao();
+        categoriaDAO sql = new  categoriaDAO(con);
+        List<Categoria> lista = new ArrayList<>();
+        String cod = jCB_Categoria.getSelectedItem().toString();
+        
+        
+        lista = sql.ConsultaCodigoCategoria(cod);
+        
+        for(Categoria b : lista){
+            int a = b.getCodigo();
+        }
+            conexao.FecharConexao(con);
     }//GEN-LAST:event_jCB_CategoriaActionPerformed
 
     private void jCB_ClassificacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_ClassificacaoActionPerformed

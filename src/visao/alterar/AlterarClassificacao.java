@@ -5,8 +5,15 @@
  */
 package visao.alterar;
 
+import DAO.classificacaoDAO;
 import DAO.conexao;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.Classificacao;
+import principal.Menu;
+
 
 /**
  *
@@ -65,9 +72,9 @@ public class AlterarClassificacao extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addComponent(lblcadastro)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         lblcadastro4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -203,13 +210,31 @@ public class AlterarClassificacao extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTF_codActionPerformed
 
+     private void InserirDados(int cod){
+        
+        Connection con = conexao.AbrirConexao();
+        classificacaoDAO sql = new classificacaoDAO(con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = sql.CapturarClassificacao(cod);
+        
+        for (Classificacao a : lista){
+        
+                jTF_Codigo.setText("" + a.getCodigo());
+                jTF_Nome.setText(""+a.getNome());
+                jTF_Preco.setText(""+a.getPreco());
+               
+                
+        }
+        conexao.FecharConexao(con);
+    }
+    
     private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
 
         String codigo = jTF_cod.getText();
         Connection con = conexao.AbrirConexao();
-        categoriaDAO sql = new categoriaDAO(con);
+        classificacaoDAO sql = new classificacaoDAO(con);
         int cod = Integer.parseInt(codigo);
-        if(sql.Testar_Categoria(cod) == false){
+        if(sql.Testar_Classificacao(cod) == false){
             JOptionPane.showMessageDialog(null,"Código não encontrado no banco",
                 "Video locadora", JOptionPane.ERROR_MESSAGE);
             conexao.FecharConexao(con);
@@ -220,6 +245,7 @@ public class AlterarClassificacao extends javax.swing.JFrame {
         }
         jTF_Codigo.setText("");
         jTF_Nome.setText("");
+        jTF_Preco.setText("");
 
         InserirDados(cod);
         jTF_cod.setText("");
@@ -228,24 +254,31 @@ public class AlterarClassificacao extends javax.swing.JFrame {
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
         String codigo = jTF_Codigo.getText();
         String nome = jTF_Nome.getText();
+        String  preco = jTF_Preco.getText();
 
         if(nome.equals("")){
             JOptionPane.showMessageDialog(null,"nenhum campo pode estar vazio"
                 ,"Video Locadora",JOptionPane.WARNING_MESSAGE);
         }else{
             Connection con = conexao.AbrirConexao();
-            categoriaDAO sql = new categoriaDAO(con);
+            classificacaoDAO sql = new classificacaoDAO(con);
             int cod =  Integer.parseInt(codigo);
-            Categoria a = new Categoria();
+            double pre =  Double.parseDouble(preco);
+            
+            
+            Classificacao a = new Classificacao();
 
+            
             a.setCodigo(cod);
             a.setNome(nome);
+            a.setPreco(pre);
 
-            sql.Alterar_Categoria(a);
+            sql.Alterar_Classificacao(a);
             conexao.FecharConexao(con);
 
             jTF_Codigo.setText("");
             jTF_Nome.setText("");
+            jTF_Preco.setText("");
 
             JOptionPane.showMessageDialog(null,"Atualizado com Sucesso",
                 "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
