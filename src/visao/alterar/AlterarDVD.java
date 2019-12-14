@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package visao.alterar;
 
-/**
- *
- * @author paulo
- */
+import principal.Menu;
+import DAO.DVDDAO;
+import DAO.conexao;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.DVD;
+
 public class AlterarDVD extends javax.swing.JFrame {
 
     /**
@@ -18,6 +18,21 @@ public class AlterarDVD extends javax.swing.JFrame {
         initComponents();
     }
 
+     private void InserirDados(int cod){
+        
+        Connection con = conexao.AbrirConexao();
+        DVDDAO sql = new DVDDAO(con);
+        List<DVD> lista = new ArrayList<>();
+        lista = sql.CapturarDVD(cod);
+        
+        for (DVD a : lista){
+        
+                jTF_Codigo.setText("" + a.getCodigo());
+                JTF_Situacao.setText(a.getSituacao());
+                
+        }
+        conexao.FecharConexao(con);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,8 +60,8 @@ public class AlterarDVD extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTF_Preco = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        JTF_Situacao = new javax.swing.JTextField();
+        jCB_Nome = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
@@ -64,10 +79,10 @@ public class AlterarDVD extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(205, 205, 205)
                 .addComponent(lblcadastro)
-                .addGap(210, 210, 210))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,6 +127,12 @@ public class AlterarDVD extends javax.swing.JFrame {
         lblcadastro5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblcadastro5.setText("Nº do DVD:");
 
+        jTF_Codigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_CodigoActionPerformed(evt);
+            }
+        });
+
         lblcadastro7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblcadastro7.setText("Nome:");
 
@@ -119,9 +140,9 @@ public class AlterarDVD extends javax.swing.JFrame {
 
         jLabel3.setText("Situação:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        JTF_Situacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                JTF_SituacaoActionPerformed(evt);
             }
         });
 
@@ -138,7 +159,7 @@ public class AlterarDVD extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTF_Preco, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -149,13 +170,13 @@ public class AlterarDVD extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JTF_Situacao, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblcadastro7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jCB_Nome, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -166,12 +187,12 @@ public class AlterarDVD extends javax.swing.JFrame {
                     .addComponent(lblcadastro5)
                     .addComponent(jTF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTF_Situacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro7)
                     .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCB_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -183,21 +204,29 @@ public class AlterarDVD extends javax.swing.JFrame {
         );
 
         jButton2.setText("Limpar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(60, 60, 60)
                 .addComponent(jButton2)
-                .addGap(92, 92, 92)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btAlterar)
-                .addGap(85, 85, 85)
+                .addGap(92, 92, 92)
                 .addComponent(jButton4)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(79, 79, 79))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(42, 42, 42)
@@ -206,20 +235,20 @@ public class AlterarDVD extends javax.swing.JFrame {
                     .addComponent(jTF_cod, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addComponent(btOK, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 206, Short.MAX_VALUE)))
+                    .addGap(0, 230, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
                     .addComponent(btAlterar)
-                    .addComponent(jButton4)
-                    .addComponent(jButton2))
-                .addGap(28, 28, 28))
+                    .addComponent(jButton4))
+                .addGap(24, 24, 24))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(84, 84, 84)
@@ -227,7 +256,7 @@ public class AlterarDVD extends javax.swing.JFrame {
                         .addComponent(jTF_cod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblcadastro4)
                         .addComponent(btOK))
-                    .addContainerGap(312, Short.MAX_VALUE)))
+                    .addContainerGap(298, Short.MAX_VALUE)))
         );
 
         pack();
@@ -235,21 +264,21 @@ public class AlterarDVD extends javax.swing.JFrame {
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
         String codigo = jTF_Codigo.getText();
-        String nome = jTF_Nome.getText();
+        String situacao = JTF_Situacao.getText();
 
-        if(nome.equals("")){
+        if(codigo.equals("")){
             JOptionPane.showMessageDialog(null,"nenhum campo pode estar vazio"
                 ,"Video Locadora",JOptionPane.WARNING_MESSAGE);
         }else{
             Connection con = conexao.AbrirConexao();
-            categoriaDAO sql = new categoriaDAO(con);
+            DVDDAO sql = new DVDDAO(con);
             int cod =  Integer.parseInt(codigo);
-            Categoria a = new Categoria();
+            DVD a = new DVD();
 
             a.setCodigo(cod);
-            a.setNome(nome);
+            a.setSituacao(situacao);
 
-            sql.Alterar_Categoria(a);
+            sql.Alterar_DVD(a);
             conexao.FecharConexao(con);
 
             jTF_Codigo.setText("");
@@ -263,9 +292,7 @@ public class AlterarDVD extends javax.swing.JFrame {
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new Menu().setVisible(true);
         dispose();
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTF_codActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_codActionPerformed
@@ -276,9 +303,9 @@ public class AlterarDVD extends javax.swing.JFrame {
 
         String codigo = jTF_cod.getText();
         Connection con = conexao.AbrirConexao();
-        categoriaDAO sql = new categoriaDAO(con);
+        DVDDAO sql = new DVDDAO(con);
         int cod = Integer.parseInt(codigo);
-        if(sql.Testar_Categoria(cod) == false){
+        if(sql.Testar_DVD(cod) == false){
             JOptionPane.showMessageDialog(null,"Código não encontrado no banco",
                 "Video locadora", JOptionPane.ERROR_MESSAGE);
             conexao.FecharConexao(con);
@@ -294,9 +321,22 @@ public class AlterarDVD extends javax.swing.JFrame {
         jTF_cod.setText("");
     }//GEN-LAST:event_btOKActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void JTF_SituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF_SituacaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_JTF_SituacaoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTF_cod.setText("");
+        jTF_Codigo.setText("");
+        jTF_Nome.setText("");
+        JTF_Situacao.setText("");  
+        jTF_Preco.setText("");
+        jTF_Nome.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTF_CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_CodigoActionPerformed
+
+    }//GEN-LAST:event_jTF_CodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,12 +374,13 @@ public class AlterarDVD extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JTF_Situacao;
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btOK;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jCB_Nome;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
@@ -352,7 +393,6 @@ public class AlterarDVD extends javax.swing.JFrame {
     private javax.swing.JTextField jTF_Nome;
     private javax.swing.JTextField jTF_Preco;
     private javax.swing.JTextField jTF_cod;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblcadastro;
     private javax.swing.JLabel lblcadastro4;
     private javax.swing.JLabel lblcadastro5;

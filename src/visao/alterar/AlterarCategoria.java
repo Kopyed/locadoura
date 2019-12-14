@@ -8,6 +8,8 @@ package visao.alterar;
 import DAO.categoriaDAO;
 import DAO.conexao;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import modelo.Categoria;
 import principal.Menu;
@@ -129,6 +131,11 @@ public class AlterarCategoria extends javax.swing.JFrame {
         );
 
         jButton2.setText("Limpar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btAlterar.setText("Alterar");
         btAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -195,9 +202,27 @@ public class AlterarCategoria extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTF_codActionPerformed
 
+     private void InserirDados(int cod){
+        
+        Connection con = conexao.AbrirConexao();
+        categoriaDAO sql = new categoriaDAO(con);
+        List<Categoria> lista = new ArrayList<>();
+        lista = sql.CapturarCategoria(cod);
+        
+        for (Categoria a : lista){
+        
+                jTF_Codigo.setText(""+ a.getCodigo());
+                jTF_Nome.setText(""+ a.getNome());
+               
+                
+        }
+        conexao.FecharConexao(con);
+    }
+    
     private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
 
         String codigo = jTF_cod.getText();
+        
         Connection con = conexao.AbrirConexao();
         categoriaDAO sql = new categoriaDAO(con);
         int cod = Integer.parseInt(codigo);
@@ -210,6 +235,8 @@ public class AlterarCategoria extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Digite um codigo para atualizar",
                 "video locadora", JOptionPane.WARNING_MESSAGE);
         }
+        
+        
         jTF_Codigo.setText("");
         jTF_Nome.setText("");
       
@@ -253,6 +280,13 @@ public class AlterarCategoria extends javax.swing.JFrame {
         dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    jTF_cod.setText("");
+    jTF_Codigo.setText("");
+    jTF_Nome.setText("");
+    
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

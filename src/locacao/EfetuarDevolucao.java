@@ -51,7 +51,7 @@ public class EfetuarDevolucao extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblcadastro3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblcadastro3.setForeground(new java.awt.Color(0, 0, 0));

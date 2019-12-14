@@ -72,7 +72,7 @@ public class categoriaDAO extends ExecuteSQL {
       boolean Resultado = false;
       try{
       
-      String sql = "select * from categoria where idcliente ="+cod+"";
+      String sql = "select * from categoria where idcategoria ="+cod+"";
       PreparedStatement ps = getCon().prepareStatement(sql);
       ResultSet rs = ps.executeQuery();
       
@@ -113,13 +113,13 @@ public class categoriaDAO extends ExecuteSQL {
           
       }
   }
-  public String Alterar_Categoria(Cliente a){
-      String sql = "update categoria set nome = ? "
+  public String Alterar_Categoria(Categoria a){
+      String sql = "update categoria set idcategoria = ? , nome = ?"
                     +" where idcategoria = ?";
       try{
           PreparedStatement ps = getCon().prepareStatement(sql);
-          ps.setString(1, a.getNome());
-          ps.setInt(11, a.getCodigo());
+          ps.setString(0, a.getNome());
+          ps.setInt(1, a.getCodigo());
  
           if (ps.executeUpdate() > 0){
               return "Atualizado com sucesso.";

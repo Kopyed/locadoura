@@ -146,6 +146,11 @@ public class AlterarClassificacao extends javax.swing.JFrame {
         );
 
         jButton2.setText("Limpar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btAlterar.setText("Alterar");
         btAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -177,9 +182,9 @@ public class AlterarClassificacao extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(jButton2)
-                .addGap(65, 65, 65)
+                .addGap(73, 73, 73)
                 .addComponent(btAlterar)
-                .addGap(57, 57, 57)
+                .addGap(49, 49, 49)
                 .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -288,10 +293,16 @@ public class AlterarClassificacao extends javax.swing.JFrame {
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new Menu().setVisible(true);
         dispose();
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            jTF_Codigo.setText(""); 
+            jTF_Nome.setText("");
+            jTF_Preco.setText("");
+            jTF_cod.setText("");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

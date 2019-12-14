@@ -117,6 +117,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         jButton1.setText("Limpar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btSalvar.setText("Cadastrar");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +131,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         });
 
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -362,6 +372,23 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void jTF_TelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_TelefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTF_TelefoneActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                jTF_Nome.setText("");
+                jTF_CEP.setText("");
+                jTF_Codigo.setText("");
+                jTF_Bairro.setText("");
+                jTF_Email.setText("");
+                jTF_Telefone.setText("");
+                jTF_Rua.setText("");
+                jTF_Nascimento.setText("");
+                jTF_RG.setText("");
+                tfCPF.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+            dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public static void main(String args[]) {
 

@@ -68,6 +68,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaoSair.png"))); // NOI18N
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,6 +168,10 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btEntrarActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_btSairActionPerformed
 
     /**
      * @param args the command line arguments

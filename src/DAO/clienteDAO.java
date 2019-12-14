@@ -39,6 +39,36 @@ public class clienteDAO extends ExecuteSQL{
            return e.getMessage();
        }
    } 
+   
+    public List<Cliente> Pesquisar_Nome_Cliente(String nome) {
+        String sql = "select idcliente, nome, rg, cpf, telefone, email from cliente where nome like '%" + nome + "%'";
+        List<Cliente> lista = new ArrayList<>();
+        
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    Cliente a = new Cliente();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setRG(rs.getString(3));
+                    a.setCPF(rs.getString(4));
+                    a.setTelefone(rs.getString(5));
+                    a.setEmail(rs.getString(6));
+                    lista.add(a); 
+                  }
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+   
+}
+   
  public List<Cliente> ListarCliente(){ 
      String sql = "select idcliente,nome,rg,cpf,telefone,email from cliente";
         List<Cliente> lista = new ArrayList<>();
@@ -132,7 +162,7 @@ public class clienteDAO extends ExecuteSQL{
       }
   }
   public String Alterar_Cliente(Cliente a){
-      String sql = "update cliente set nome = ? ,data_nasc = ? ,rg = ? "
+      String sql = "update cliente set nome = ? , data_nasc = ? ,rg = ? "
                     + ",cpf = ? ,email = ? ,telefone = ? ,bairro = ?,rua = ?"
                     +",numero = ?,cep = ? where idcliente = ?";
       try{

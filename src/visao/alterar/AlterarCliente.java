@@ -248,6 +248,11 @@ public class AlterarCliente extends javax.swing.JFrame {
         );
 
         jButton2.setText("Limpar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btAlterar.setText("Alterar");
         btAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -433,8 +438,22 @@ public class AlterarCliente extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         new Menu().setVisible(true);
         dispose();
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            jTF_cod.setText("");            
+            jTF_Codigo.setText("");            
+            jTF_Nome.setText("");
+            jTF_CEP.setText("");
+            jTF_Numero.setText("");
+            jTF_Bairro.setText("");
+            jTF_Email.setText("");
+            jTF_Telefone.setText("");
+            jTF_Rua.setText("");
+            jTF_Nascimento.setText("");
+            jTF_RG.setText("");
+            jTF_CPF.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
