@@ -5,6 +5,14 @@
  */
 package visao.excluir;
 
+import DAO.FuncionarioDAO;
+import DAO.conexao;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.Funcionario;
+
 /**
  *
  * @author paulo
@@ -117,8 +125,8 @@ public class ExcluirFuncionario extends javax.swing.JFrame {
         String nome = jCB_Nome.getSelectedItem().toString();
 
         Connection con = conexao.AbrirConexao();
-        clienteDAO sql = new clienteDAO(con);
-        Cliente a = new Cliente();
+        FuncionarioDAO sql = new FuncionarioDAO(con);
+        Funcionario a = new Funcionario();
         if(nome.equals("")){
             JOptionPane.showMessageDialog(null,"Nenhum nome selecionado",
                 "Video Locadora",JOptionPane.WARNING_MESSAGE);
@@ -131,8 +139,8 @@ public class ExcluirFuncionario extends javax.swing.JFrame {
             if(b == 0){
                 int cod = Integer.parseInt(codigo);
                 a.setNome(nome);
-                a.setCodigo(cod);
-                sql.Excluir_Cliente(a);
+                a.setCod(cod);
+                sql.Excluir_Funcionario(a);
                 conexao.FecharConexao(con);
 
             }
@@ -142,14 +150,14 @@ public class ExcluirFuncionario extends javax.swing.JFrame {
 
     private void jCB_NomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_NomeActionPerformed
         Connection con = conexao.AbrirConexao();
-        clienteDAO sql = new clienteDAO(con);
-        List<Cliente> lista = new ArrayList<>();
+        FuncionarioDAO sql = new FuncionarioDAO(con);
+        List<Funcionario> lista = new ArrayList<>();
         String nome = jCB_Nome.getSelectedItem().toString();
 
         lista = sql.ConsultaCodigoCliente(nome);
 
-        for(Cliente b : lista){
-            int a = b.getCodigo();
+        for(Funcionario b : lista){
+            int a = b.getCod();
             jTF_codigo.setText(""+a);
         }
         conexao.FecharConexao(con);

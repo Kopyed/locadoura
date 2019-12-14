@@ -7,6 +7,7 @@ package visao.cadastrar;
 
 import DAO.FilmeDAO;
 import DAO.categoriaDAO;
+import DAO.classificacaoDAO;
 import DAO.conexao;
 import java.io.File;
 import java.sql.Connection;
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import modelo.Categoria;
+import modelo.Classificacao;
 import modelo.Filme;
 
 /**
@@ -25,11 +27,41 @@ import modelo.Filme;
  */
 public class CadastrarFilme extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastrarFilme
-     */
+    private void AtualizaComboClassificacao(){
+        Connection con = conexao.AbrirConexao();
+        classificacaoDAO sql = new classificacaoDAO(con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = sql.ListarClassificacao();
+     
+        jCB_Classificacao.addItem("");
+        jTF_Classificacao.setText("");
+         
+        for (Classificacao b: lista){
+            jCB_Classificacao.addItem(b.getNome());
+            
+       }
+        conexao.FecharConexao(con);
+    }
+    
+    private void AtualizaComboCategoria(){
+        Connection con = conexao.AbrirConexao();
+        categoriaDAO sql = new categoriaDAO(con);
+        List<Categoria> lista = new ArrayList<>();
+        lista = sql.ListarComboCategoria();
+        
+        jCB_Categoria.addItem("");
+        jTF_Classificacao.setText("");
+        
+        for (Categoria b: lista){
+            jCB_Categoria.addItem(b.getNome());
+        }
+        conexao.FecharConexao(con);
+    }
     public CadastrarFilme() {
         initComponents();
+        AtualizaComboClassificacao();
+        AtualizaComboCategoria();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -197,8 +229,8 @@ public class CadastrarFilme extends javax.swing.JFrame {
                                         .addComponent(jCB_Classificacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jTF_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jCB_Categoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jCB_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jTF_Ano, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -259,19 +291,33 @@ public class CadastrarFilme extends javax.swing.JFrame {
         Connection con = conexao.AbrirConexao();
         categoriaDAO sql = new  categoriaDAO(con);
         List<Categoria> lista = new ArrayList<>();
-        String cod = jCB_Categoria.getSelectedItem().toString();
+        String nome = jCB_Categoria.getSelectedItem().toString();
         
         
-        lista = sql.ConsultaCodigoCategoria(cod);
+        lista = sql.ConsultaCodigoCategoria(nome);
         
         for(Categoria b : lista){
             int a = b.getCodigo();
+            jTF_Categoria.setText("" + a);
+
         }
             conexao.FecharConexao(con);
     }//GEN-LAST:event_jCB_CategoriaActionPerformed
 
+
     private void jCB_ClassificacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_ClassificacaoActionPerformed
-        // TODO add your handling code here:
+              Connection con = conexao.AbrirConexao();
+        classificacaoDAO sql = new classificacaoDAO(con);
+        List<Classificacao> lista = new ArrayList<>();
+        String nome = jCB_Classificacao.getSelectedItem().toString();
+        
+        lista = sql.ConsultaCodigoClassificacao(nome);
+        
+        for (Classificacao b: lista){
+            int a = b.getCodigo();
+            jTF_Classificacao.setText("" + a);
+        }
+        conexao.FecharConexao(con);
     }//GEN-LAST:event_jCB_ClassificacaoActionPerformed
 
     private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed

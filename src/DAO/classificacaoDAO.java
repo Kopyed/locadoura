@@ -160,7 +160,7 @@ public class classificacaoDAO extends ExecuteSQL {
   }
   
   
-  public List<Classificacao> ConsultaCodigoCliente(String nome){
+  public List<Classificacao> ConsultaCodigoClassificacao(String nome){
       
       String sql = "select idclassificacao from classificacao where nome = '"+nome+"'";
       List<Classificacao> lista = new ArrayList<>();

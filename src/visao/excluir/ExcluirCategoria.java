@@ -5,6 +5,13 @@
  */
 package visao.excluir;
 
+import DAO.categoriaDAO;
+import DAO.conexao;
+import java.sql.Connection;
+import modelo.Categoria;
+import java.util.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author paulo
@@ -122,8 +129,8 @@ public class ExcluirCategoria extends javax.swing.JFrame {
         String nome = jCB_Nome.getSelectedItem().toString();
 
         Connection con = conexao.AbrirConexao();
-        clienteDAO sql = new clienteDAO(con);
-        Cliente a = new Cliente();
+        categoriaDAO sql = new categoriaDAO(con);
+        Categoria a = new Categoria();
         if(nome.equals("")){
             JOptionPane.showMessageDialog(null,"Nenhum nome selecionado",
                 "Video Locadora",JOptionPane.WARNING_MESSAGE);
@@ -137,7 +144,7 @@ public class ExcluirCategoria extends javax.swing.JFrame {
                 int cod = Integer.parseInt(codigo);
                 a.setNome(nome);
                 a.setCodigo(cod);
-                sql.Excluir_Cliente(a);
+                sql.Excluir_Categoria(a);
                 conexao.FecharConexao(con);
 
             }
@@ -147,13 +154,13 @@ public class ExcluirCategoria extends javax.swing.JFrame {
 
     private void jCB_NomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_NomeActionPerformed
         Connection con = conexao.AbrirConexao();
-        clienteDAO sql = new clienteDAO(con);
-        List<Cliente> lista = new ArrayList<>();
+        categoriaDAO sql = new categoriaDAO(con);
+        List<Categoria> lista = new ArrayList<>();
         String nome = jCB_Nome.getSelectedItem().toString();
 
-        lista = sql.ConsultaCodigoCliente(nome);
+        lista = sql.ConsultaCodigoCategoria(nome);
 
-        for(Cliente b : lista){
+        for(Categoria b : lista){
             int a = b.getCodigo();
             jTF_codigo.setText(""+a);
         }

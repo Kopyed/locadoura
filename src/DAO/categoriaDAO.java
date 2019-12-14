@@ -114,12 +114,11 @@ public class categoriaDAO extends ExecuteSQL {
       }
   }
   public String Alterar_Categoria(Categoria a){
-      String sql = "update categoria set idcategoria = ? , nome = ?"
-                    +" where idcategoria = ?";
+      String sql = "update categoria set nome = ? where idcategoria = ?";
       try{
           PreparedStatement ps = getCon().prepareStatement(sql);
-          ps.setString(0, a.getNome());
-          ps.setInt(1, a.getCodigo());
+          ps.setString(1, a.getNome());
+          ps.setInt(2, a.getCodigo());
  
           if (ps.executeUpdate() > 0){
               return "Atualizado com sucesso.";
@@ -183,7 +182,7 @@ public class categoriaDAO extends ExecuteSQL {
       }
   }
   
-  public String Excluir_Categoria(Cliente a){
+  public String Excluir_Categoria(Categoria a){
       String sql = "delete from categoria where idcategoria = ? and nome = ?";
       
       try{
