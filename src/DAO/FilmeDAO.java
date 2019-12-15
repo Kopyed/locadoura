@@ -44,7 +44,7 @@ public class FilmeDAO extends ExecuteSQL{
         }
         }
        public String Inserir_Filme(Filme a) throws SQLException{
-       String sql = "insert into filme values(?,?,?,?,?,?,?)";
+       String sql = "insert into filme values(0,?,?,?,?,?,?)";
        try{
            PreparedStatement ps = getCon().prepareStatement(sql);
            
@@ -66,36 +66,34 @@ public class FilmeDAO extends ExecuteSQL{
            return e.getMessage();
        }
    } 
- public List<Filme> ListarFilme(){ 
-     String sql = "select idfilme,titulo,ano,duracao,idcategoria,idclassificao,capa from filme";
+ 
+ public List<Filme> ListarFilme(){
+        String sql = "select idfilme,titulo,ano,duracao,idcategoria,idclassificacao,capa from filme";
         List<Filme> lista = new ArrayList<>();
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs != null){
-           
-                while(rs.next()){
-                    Filme a = new Filme();
+            if(rs != null) {
+                while (rs.next()){
+                   Filme a= new Filme();
                     a.setCodigo(rs.getInt(1));
                     a.setTitulo(rs.getString(2));
                     a.setAno(rs.getInt(3));
                     a.setDuracao(rs.getString(4));
                     a.setCod_categoria(rs.getInt(5));
                     a.setCod_classificao(rs.getInt(6));
-                    
+                    a.setCapa(rs.getString(7));
                     lista.add(a);
-                }
+                  }
                 return lista;
             }else{
-            return null;
+                return null;
+                
             }
-            
-        }catch(SQLException e) {
+        } catch (SQLException e) {
             return null;
-        }    
- }
- 
+        }
+    }
  
   
   public boolean Testar_Filme(int cod){
@@ -189,7 +187,7 @@ public class FilmeDAO extends ExecuteSQL{
   
   public List<Filme> ConsultaCodigoFilme(String titulo){
       
-      String sql = "select idcliente from cliente where titulo = '" + titulo + "'";
+      String sql = "select idfilme from filme where titulo = '" + titulo + "'";
       List<Filme> lista = new ArrayList<>();
       try{
           PreparedStatement ps = getCon().prepareStatement(sql);

@@ -4,11 +4,33 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.DVD;
+import modelo.Filme;
 
 public class DVDDAO extends ExecuteSQL {
 
     public DVDDAO(Connection con) {
         super(con);
+    }
+      
+     public String Inserir_DVD(DVD a) {
+    String sql = "insert into dvd values(0,?,?,?,?)";
+    try{
+        PreparedStatement ps = getCon().prepareStatement(sql);
+        
+        ps.setInt(1, a.getCod_filme());
+        ps.setDouble(2, a.getPreco());
+        ps.setString(3, a.getData_compra());
+        ps.setString(4, a.getSituacao());
+        
+        if (ps.executeUpdate() > 0) {
+            return "Inserido com Sucesso.";
+        }
+        else{
+            return "Erro ao Inserir";
+        }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
     }
     
      public boolean Testar_DVD(int cod){
@@ -39,7 +61,7 @@ public class DVDDAO extends ExecuteSQL {
       try{
       
       String sql = "select iddvd from dvd where iddvd ="+cod+""+
-              "and situacao = 'Disponivel'";
+              "and situacao = 'disponivel' ";
       PreparedStatement ps = getCon().prepareStatement(sql);
       ResultSet rs = ps.executeQuery();
       
@@ -57,26 +79,8 @@ public class DVDDAO extends ExecuteSQL {
         return teste;      
   }     
      
-    public String Inserir_DVD(DVD a) throws SQLException{
-       String sql = "insert into cliente values(0,?,?,?,?)";
-       try{
-           PreparedStatement ps = getCon().prepareStatement(sql);
-           
-           ps.setInt(1, a.getCodigo());
-           ps.setInt(2, a.getCod_filme());
-           ps.setString(3, a.getSituacao());
-           ps.setDouble(4,a.getPreco());
-           ps.setString(5,a.getData_compra());
-           
-           if (ps.executeUpdate() > 0){
-               return "inserido com sucesso";
-           } else {
-               return "Erro ao inserir";
-           }
-       } catch (SQLException e){
-           return e.getMessage();
-       }
-   } 
+    
+    
  public List<DVD> Listar(){ 
      String sql = "select iddvd,idfilme,preco_compra,data_compra,situacao from dvd";
         List<DVD> lista = new ArrayList<>();
@@ -113,6 +117,33 @@ public class DVDDAO extends ExecuteSQL {
         return null;
   }
   
+  
+        public List<DVD> Pesquisar_Cod_Filme(int cod) {
+        String sql = "select iddvd, idfilme, preco_compra, data_compra, situacao from dvd where idfilme like '%" + cod + "%'";
+           List<DVD> lista = new ArrayList<>();
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    DVD a= new DVD();
+                    a.setCodigo(rs.getInt(1));
+                    a.setCod_filme(rs.getInt(2));
+                    a.setPreco(rs.getInt(3));
+                    a.setData_compra(rs.getString(4));                   
+                    a.setSituacao(rs.getString(5));
+                    lista.add(a);
+                  }
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+   
+}
   
   public List<DVD> CapturarDVD(int cod){
       String sql = "select * from dvd where iddvd ="+ cod +"";

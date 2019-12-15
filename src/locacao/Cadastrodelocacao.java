@@ -473,7 +473,6 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     public void AtualizaDate(){
-    
         Date date = new Date();
         SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat hora = new SimpleDateFormat("hh:mm");

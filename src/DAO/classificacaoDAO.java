@@ -33,7 +33,7 @@ public class classificacaoDAO extends ExecuteSQL {
        }
    } 
  public List<Classificacao> ListarClassificacao(){ 
-     String sql = "select idcliente,nome, from classificacao";
+        String sql = "select idclassificacao,nome,preco from classificacao";
         List<Classificacao> lista = new ArrayList<>();
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -113,25 +113,24 @@ public class classificacaoDAO extends ExecuteSQL {
           
       }
   }
+  
   public String Alterar_Classificacao(Classificacao a){
-      String sql = "update classificacao set idclassificacao = ? ,set nome = ? , set preco = ? "
-                    +", where idclassificacao = ? ";
-      try{
-          PreparedStatement ps = getCon().prepareStatement(sql);
-          ps.setString(1, a.getNome());
-          ps.setInt(2, a.getCodigo());
-          ps.setDouble(3, a.getPreco());
-
- 
-          if (ps.executeUpdate() > 0){
-              return "Atualizado com sucesso.";
-          }else{
-              return "Erro ao atualizar";
-          }
-      }catch (SQLException e){
+            String sql = "update classificacao set nome = ? , preco = ? where idclassificacao = ? ";
+        try {
+            
+            PreparedStatement ps =  getCon().prepareStatement(sql);
+            ps.setString(1, a.getNome());
+            ps.setDouble(2, a.getPreco());
+            ps.setInt(3, a.getCodigo());
+            if (ps.executeUpdate() > 0){
+                return "Atualizado com Sucesso.";
+            } else {
+                return "Erro ao Atualizar";
+            }
+      } catch (SQLException e) {
           return e.getMessage();
       }
-  }
+        }
   
 
   public List<Classificacao> ListarComboClassificacao(){
