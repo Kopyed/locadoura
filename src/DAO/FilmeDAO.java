@@ -15,7 +15,34 @@ public class FilmeDAO extends ExecuteSQL{
     public FilmeDAO(Connection con) {
         super(con);
     }
-    
+        public List<Filme> Pesquisar_Nome_Filme(String titulo) {
+        String sql = "select idfilme, titulo, ano, duracao, idcategoria, idclassificacao from filme where titulo like '%" + titulo + "%'";
+        List<Filme> lista = new ArrayList<>();
+        
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    Filme a = new Filme();
+                    a.setCodigo(rs.getInt(1));
+                    a.setTitulo(rs.getString(2));
+                    a.setAno(rs.getInt(3));
+                    a.setDuracao(rs.getString(4));
+                    a.setCod_categoria(rs.getInt(5));
+                    a.setCod_classificao(rs.getInt(6));
+                    lista.add(a); 
+                  }
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+   
+}
      public List<Filme> Pesquisar_Cod_Filme(int cod){
     String sql = "select idfilme,titulo,ano,duracao,idcategoria,idclassificacao,"
             +"capa from filme whhere idfilme = '" + cod + "'";

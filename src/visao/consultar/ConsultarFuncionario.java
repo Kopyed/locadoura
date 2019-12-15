@@ -5,6 +5,14 @@
  */
 package visao.consultar;
 
+import DAO.FuncionarioDAO;
+import DAO.conexao;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import modelo.Funcionario;
+
 /**
  *
  * @author paulo
@@ -16,6 +24,27 @@ public class ConsultarFuncionario extends javax.swing.JFrame {
      */
     public ConsultarFuncionario() {
         initComponents();
+        AtualizaTable();
+    }
+    private void AtualizaTable(){
+        Connection con = conexao.AbrirConexao();
+        FuncionarioDAO bd = new FuncionarioDAO(con);
+        List<Funcionario> lista = new ArrayList<>();
+        lista = bd.ListarFuncionario();
+        DefaultTableModel tbm = (DefaultTableModel) jTable.getModel();
+        while (tbm.getRowCount() > 0){
+            tbm.removeRow(0);
+        }
+        int i = 0;
+        for (Funcionario tab : lista){
+            tbm.addRow(new String[1]);
+            jTable.setValueAt(tab.getCod(), i, 0);
+            jTable.setValueAt(tab.getNome(), i, 1);
+            jTable.setValueAt(tab.getLogin(), i, 2);
+            jTable.setValueAt("***************", i, 3);
+            i++;
+        }
+        conexao.FecharConexao(con);
     }
 
     /**
@@ -131,7 +160,7 @@ public class ConsultarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        AtualizaTable();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 

@@ -20,6 +20,31 @@ public class categoriaDAO extends ExecuteSQL {
     public categoriaDAO(Connection con) {
         super(con);
     }
+    public List<Categoria> Pesquisar_Nome_Categoria(String nome) {
+        String sql = "select idcategoria, nome from categoria where nome like '%" + nome + "%'";
+        List<Categoria> lista = new ArrayList<>();
+        
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    Categoria a = new Categoria();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    lista.add(a); 
+                  }
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+   
+}
+    
    public String Inserir_Categoria(Cliente a) throws SQLException{
        String sql = "insert into categoria values(0,?)";
        try{
@@ -37,9 +62,9 @@ public class categoriaDAO extends ExecuteSQL {
            return e.getMessage();
        }
    } 
- public List<Cliente> ListarCategoria(){ 
+ public List<Categoria> ListarCategoria(){ 
      String sql = "select idcategoria, nome from categoria";
-        List<Cliente> lista = new ArrayList<>();
+        List<Categoria> lista = new ArrayList<>();
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -47,7 +72,7 @@ public class categoriaDAO extends ExecuteSQL {
             if(rs != null){
            
                 while(rs.next()){
-                    Cliente a = new Cliente();
+                    Categoria a = new Categoria();
                     
                     a.setNome(rs.getString(1));
                     lista.add(a);
@@ -62,9 +87,9 @@ public class categoriaDAO extends ExecuteSQL {
         }    
  }
  
-  public List<Cliente> Pesquisar_Cod_Categoria(int cod){
+  public List<Categoria> Pesquisar_Cod_Categoria(int cod){
       String sql
-              = "select idcategoria, Nome  from categoria where idcategoria = '"+cod+"'";
+              = "select idcategoria, nome  from categoria where idcategoria = '"+cod+"'";
         return null;
   }
   

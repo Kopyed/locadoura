@@ -5,6 +5,7 @@ import DAO.DVDDAO;
 import DAO.FilmeDAO;
 import DAO.conexao;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -284,7 +285,7 @@ public class AlterarDVD extends javax.swing.JFrame {
         String codigo = jTF_Codigo.getText();
         String filme = jTF_Nome.getText();
         String preco = jTF_Preco.getText();
-        String data = jDatacompra.getText();
+        String data = new SimpleDateFormat("dd/MM/yyyy").format(jDatacompra.getDate());
         String situacao = jTF_Situacao.getText();
         
        if (filme.equals("")) {
@@ -309,7 +310,7 @@ public class AlterarDVD extends javax.swing.JFrame {
         conexao.FecharConexao(con);
         jTF_Nome.setText("");
         jTF_Preco.setText("");
-        jDatacompra.setText("");
+        jDatacompra.setDate(null);
         jTF_Situacao.setText("");
         jTF_Codigo.setText("");
        

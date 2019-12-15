@@ -81,7 +81,7 @@ public class DVDDAO extends ExecuteSQL {
      
     
     
- public List<DVD> Listar(){ 
+ public List<DVD> ListarDVD(){ 
      String sql = "select iddvd,idfilme,preco_compra,data_compra,situacao from dvd";
         List<DVD> lista = new ArrayList<>();
         try{
