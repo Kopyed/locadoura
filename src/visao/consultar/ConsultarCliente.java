@@ -14,14 +14,13 @@ public class ConsultarCliente extends javax.swing.JFrame {
     /**
      * Creates new form ConsultarCliente
      */
-    public ConsultarCliente() {
+     public ConsultarCliente() {
         initComponents();
-        
-        setTitle("Vídeo Locadora");
-        setSize(970, 380);
+        setTitle("Video Locadora");
+        setSize(970,380);
         AtualizaTable();
+        setLocationRelativeTo(this);
     }
-    
     private void AtualizaTable(){
         Connection con = conexao.AbrirConexao();
         clienteDAO bd = new clienteDAO(con);
@@ -50,10 +49,10 @@ public class ConsultarCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTF_Nome = new javax.swing.JTextField();
+        bt_pesquisar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTF_Cod = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,16 +62,16 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
         jLabel1.setText("Pesquisa por Nome:");
 
-        jButton1.setText("Lupa");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bt_pesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.jpg"))); // NOI18N
+        bt_pesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bt_pesquisarActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Pesquisa por Código:");
 
-        jButton2.setText("Lupa");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.jpg"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -110,16 +109,16 @@ public class ConsultarCliente extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addGap(68, 68, 68)
+                        .addComponent(jTF_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
                         .addComponent(jButton3)))
                 .addGap(26, 26, 26))
         );
@@ -129,34 +128,95 @@ public class ConsultarCliente extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jTF_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3)
+                    .addComponent(bt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-
-            // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void bt_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pesquisarActionPerformed
+         String nome = jTF_Nome.getText();
+        Connection con = conexao.AbrirConexao();
+         clienteDAO bd= new clienteDAO (con);
+         List<Cliente> lista = new ArrayList<>();
+         lista = bd.Pesquisar_Nome_Cliente(nome);
+         DefaultTableModel tbm = (DefaultTableModel) jTable.getModel ();
+         while (tbm.getRowCount()>0) {
+             tbm.removeRow(0);
+              }
+         int i = 0;
+         for( Cliente tab : lista) {
+             tbm.addRow(new String[i]);
+             jTable.setValueAt(tab.getCodigo(), i,0);
+              jTable.setValueAt(tab.getNome(), i,1); 
+               jTable.setValueAt(tab.getCPF(), i,2);
+                jTable.setValueAt(tab.getRG(), i,3);
+                 jTable.setValueAt(tab.getTelefone(), i,4);
+                  jTable.setValueAt(tab.getEmail(), i,5);
+                  i++;
+                  
+                 }
+         conexao.FecharConexao(con);
+        
+    }//GEN-LAST:event_bt_pesquisarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-
-        // TODO add your handling code here:
+ String nome = jTF_Nome.getText();
+        Connection con = conexao.AbrirConexao();
+         clienteDAO bd= new clienteDAO (con);
+         List<Cliente> lista = new ArrayList<>();
+         lista = bd.Pesquisar_Nome_Cliente(nome);
+         DefaultTableModel tbm = (DefaultTableModel) jTable.getModel ();
+         while (tbm.getRowCount()>0) {
+             tbm.removeRow(0);
+              }
+         int i = 0;
+         for( Cliente tab : lista) {
+             tbm.addRow(new String[i]);
+             jTable.setValueAt(tab.getCodigo(), i,0);
+              jTable.setValueAt(tab.getNome(), i,1); 
+               jTable.setValueAt(tab.getCPF(), i,2);
+                jTable.setValueAt(tab.getRG(), i,3);
+                 jTable.setValueAt(tab.getTelefone(), i,4);
+                  jTable.setValueAt(tab.getEmail(), i,5);
+                  i++;
+                  
+                 }
+         conexao.FecharConexao(con);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        int cod = Integer.parseInt( jTF_Cod.getText());
+        Connection con = conexao.AbrirConexao();
+         clienteDAO bd= new clienteDAO (con);
+         List<Cliente> lista = new ArrayList<>();
+         lista = bd.Pesquisar_Cod_Cliente(cod);
+         DefaultTableModel tbm = (DefaultTableModel) jTable.getModel ();
+         while (tbm.getRowCount()>0) {
+             tbm.removeRow(0);
+              }
+         int i = 0;
+         for( Cliente tab : lista) {
+             tbm.addRow(new String[i]);
+             jTable.setValueAt(tab.getCodigo(), i,0);
+              jTable.setValueAt(tab.getNome(), i,1); 
+               jTable.setValueAt(tab.getCPF(), i,2);
+                jTable.setValueAt(tab.getRG(), i,3);
+                 jTable.setValueAt(tab.getTelefone(), i,4);
+                  jTable.setValueAt(tab.getEmail(), i,5);
+                  i++;
+                  
+                 }
+         conexao.FecharConexao(con);        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -195,14 +255,14 @@ public class ConsultarCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bt_pesquisar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTF_Cod;
+    private javax.swing.JTextField jTF_Nome;
     private javax.swing.JTable jTable;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
