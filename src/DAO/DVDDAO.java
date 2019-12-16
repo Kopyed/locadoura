@@ -282,4 +282,19 @@ public class DVDDAO extends ExecuteSQL {
           return e.getMessage();
       }
   }
+public void Atualizar_Situacao(DVD c) {
+        
+    String sql = "update dvd set situacao = ? where iddvd = ? ";
+            try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, c.getSituacao());
+            ps.setInt(2, c.getCodigo());
+            if (ps.executeUpdate() > 0) {
+            } else {
+            }
+        } catch (SQLException e) {
+        }
+    }
+     
 }
+

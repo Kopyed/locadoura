@@ -31,7 +31,7 @@ public class AlterarDVD extends javax.swing.JFrame {
                 jTF_Codigo.setText("" + a.getCodigo());
                 jTF_Preco.setText(""+a.getPreco());
                 jTF_Nome.setText("" + a.getCod_filme());
-                jTF_Situacao.setText(a.getSituacao());
+                jTF_Situacao.setText("" + a.getSituacao());
                 
                
             } 
@@ -70,7 +70,7 @@ public class AlterarDVD extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         lblcadastro4 = new javax.swing.JLabel();
         jTF_cod = new javax.swing.JTextField();
-        btOK = new javax.swing.JButton();
+        btOK1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblcadastro5 = new javax.swing.JLabel();
         jTF_Codigo = new javax.swing.JTextField();
@@ -134,10 +134,10 @@ public class AlterarDVD extends javax.swing.JFrame {
             }
         });
 
-        btOK.setText("ok");
-        btOK.addActionListener(new java.awt.event.ActionListener() {
+        btOK1.setText("ok");
+        btOK1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btOKActionPerformed(evt);
+                btOK1ActionPerformed(evt);
             }
         });
 
@@ -253,7 +253,7 @@ public class AlterarDVD extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jTF_cod, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
-                    .addComponent(btOK, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btOK1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 230, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -274,7 +274,7 @@ public class AlterarDVD extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTF_cod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblcadastro4)
-                        .addComponent(btOK))
+                        .addComponent(btOK1))
                     .addContainerGap(298, Short.MAX_VALUE)))
         );
 
@@ -310,7 +310,7 @@ public class AlterarDVD extends javax.swing.JFrame {
         conexao.FecharConexao(con);
         jTF_Nome.setText("");
         jTF_Preco.setText("");
-        jDatacompra.setDate(null);
+        //jDatacompra.setDate(null);
         jTF_Situacao.setText("");
         jTF_Codigo.setText("");
        
@@ -327,7 +327,7 @@ public class AlterarDVD extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTF_codActionPerformed
 
-    private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
+    private void btOK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOK1ActionPerformed
 
         String codigo = jTF_cod.getText();
         Connection con = conexao.AbrirConexao();
@@ -347,7 +347,7 @@ public class AlterarDVD extends javax.swing.JFrame {
 
         InserirDados(cod);
         jTF_cod.setText("");
-    }//GEN-LAST:event_btOKActionPerformed
+    }//GEN-LAST:event_btOK1ActionPerformed
 
     private void jTF_SituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_SituacaoActionPerformed
         // TODO add your handling code here:
@@ -403,7 +403,7 @@ public class AlterarDVD extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
-    private javax.swing.JButton btOK;
+    private javax.swing.JButton btOK1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCB_Nome;

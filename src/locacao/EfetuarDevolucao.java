@@ -5,6 +5,14 @@
  */
 package locacao;
 
+import DAO.AluguelDAO;
+import DAO.DVDDAO;
+import DAO.conexao;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import modelo.Aluguel;
+import modelo.DVD;
+
 /**
  *
  * @author paulo
@@ -28,11 +36,11 @@ public class EfetuarDevolucao extends javax.swing.JFrame {
     private void initComponents() {
 
         lblcadastro3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTF_Cod = new javax.swing.JTextField();
         lblcadastro4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTF_CodD = new javax.swing.JTextField();
         lblcadastro5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTF_Filme = new javax.swing.JTextField();
         lblcadastro6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         lblcadastro7 = new javax.swing.JLabel();
@@ -54,50 +62,50 @@ public class EfetuarDevolucao extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblcadastro3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro3.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro3.setText("Código Aluguel:");
 
         lblcadastro4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro4.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro4.setText("Código DVD :");
 
         lblcadastro5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro5.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro5.setText("Filme:");
 
         lblcadastro6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro6.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro6.setText("Cliente:");
 
         lblcadastro7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro7.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro7.setText("Classificação:");
 
         lblcadastro8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro8.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro8.setText("Categoria:");
 
         lblcadastro9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro9.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro9.setText("Valor do Aluguel:");
 
         lblcadastro10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro10.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro10.setText("Locação:");
 
         lblcadastro11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro11.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro11.setText("Devolução:");
 
         lblcadastro12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblcadastro12.setForeground(new java.awt.Color(0, 0, 0));
         lblcadastro12.setText("Horas:");
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Devolver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,7 +144,7 @@ public class EfetuarDevolucao extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblcadastro5)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTF_Filme, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,11 +180,11 @@ public class EfetuarDevolucao extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblcadastro3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTF_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(110, 110, 110)
                                 .addComponent(lblcadastro4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTF_CodD, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(148, 148, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -185,13 +193,13 @@ public class EfetuarDevolucao extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTF_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblcadastro4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTF_CodD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTF_Filme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro6)
@@ -219,6 +227,42 @@ public class EfetuarDevolucao extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    String codigo = jTF_Cod.getText();
+        String nome = jTF_Filme.getText();
+        String codigodvd = jTF_CodD.getText();
+        Connection con = conexao.AbrirConexao();
+        AluguelDAO sql = new AluguelDAO(con);
+        Aluguel a = new Aluguel();
+        DVDDAO dvd = new DVDDAO(con);
+        DVD c = new DVD();
+        if (codigo.equals("")) {
+            JOptionPane.showMessageDialog(null, "Nenhum Nome Selecionado",
+                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
+        } else {
+        int b = JOptionPane.showConfirmDialog(null, "Deseja realmente Devolver"
+                + " \n ( " + codigo + " ) ( " + nome + " ) ", "Video Locadora",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (b == 0) {
+                int cod = Integer.parseInt(codigo);
+                int coddvd = Integer.parseInt(codigodvd);
+                a.setCod(cod);
+                String situacao = "Disponivel";
+                c.setCodigo(coddvd);
+                c.setSituacao(situacao);
+                dvd.Atualizar_Situacao(c);
+                sql.Excluir_Aluguel(a);
+                conexao.FecharConexao(con);
+                dispose();
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,10 +304,10 @@ public class EfetuarDevolucao extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTF_Cod;
+    private javax.swing.JTextField jTF_CodD;
+    private javax.swing.JTextField jTF_Filme;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;

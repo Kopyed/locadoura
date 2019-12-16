@@ -1,6 +1,13 @@
 
 package locacao;
 
+import DAO.clienteDAO;
+import DAO.conexao;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import modelo.Cliente;
 import modelo.Listar;
 
 
@@ -11,8 +18,27 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
      */
     public ConsultaDevolucao() {
         initComponents();
+        AtualizaTable();
+        setLocationRelativeTo(this);
     }
-
+private void AtualizaTable(){
+        Connection con = conexao.AbrirConexao();
+        clienteDAO bd = new clienteDAO(con);
+        List<Cliente> lista = new ArrayList<>();
+        lista = bd.ListarCliente();
+        DefaultTableModel tbm = (DefaultTableModel) jTable.getModel();
+        while (tbm.getRowCount() > 0){
+            tbm.removeRow(0);
+        }
+        int i = 0;
+        for (Cliente tab : lista){
+            tbm.addRow(new String[1]);
+            jTable.setValueAt(tab.getCodigo(), i, 0);
+            jTable.setValueAt(tab.getNome(), i, 1);
+            i++;
+        }
+        conexao.FecharConexao(con);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,7 +113,7 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
         a.setCodaluguel(idaluguel);
         a.setCodcliente(idcliente);
         
-        new EFetuarDevolucao().setVisible(true); 
+        new EfetuarDevolucao().setVisible(true); 
     }//GEN-LAST:event_jTableMouseClicked
 
     /**

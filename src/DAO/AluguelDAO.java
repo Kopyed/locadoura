@@ -14,6 +14,7 @@ public class AluguelDAO extends ExecuteSQL{
     public AluguelDAO(Connection con) {
         super(con);
     }
+    
  public String Inserir_Aluguel(Aluguel a) throws SQLException{
        String sql = "insert into aluguel values(0,?,?,?,?,?)";
        try{
@@ -193,7 +194,7 @@ public class AluguelDAO extends ExecuteSQL{
       }
   }
   
-  public String Excluir_Cliente(Aluguel a){
+  public String Excluir_Aluguel(Aluguel a){
       String sql = "delete from aluguel where idaluguel = ? ";
       
       try{

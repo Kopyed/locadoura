@@ -278,12 +278,12 @@ public class AlterarFilme extends javax.swing.JFrame {
         for (Filme a : lista){
         
                 jTF_Codigo.setText("" + a.getCodigo());
-                jTF_Titulo.setText(a.getTitulo());
+                jTF_Titulo.setText(""+a.getTitulo());
                 jTF_Ano.setText(""+a.getAno());
-                jTF_Duracao.setText(a.getDuracao());
+                jTF_Duracao.setText(""+a.getDuracao());
                 jTF_Categoria.setText(""+a.getCod_categoria());
                 jTF_Classificacao.setText(""+a.getCod_classificao());
-                jTF_Capa.setText(a.getCapa());
+                jTF_Capa.setText(""+a.getCapa());
         }
         conexao.FecharConexao(con);
     }

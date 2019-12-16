@@ -61,6 +61,11 @@ public class ExcluirDVD extends javax.swing.JFrame {
         });
 
         btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -167,6 +172,10 @@ public class ExcluirDVD extends javax.swing.JFrame {
         }
         conexao.FecharConexao(con);
     }//GEN-LAST:event_jCB_NomeActionPerformed
+
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btCancelarActionPerformed
 
     /**
      * @param args the command line arguments

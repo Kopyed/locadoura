@@ -240,7 +240,7 @@ public class ExcluirFilme extends javax.swing.JFrame {
     }//GEN-LAST:event_btExcluir1ActionPerformed
 
     private void jCB_Nome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_Nome1ActionPerformed
-
+        AtualizaCombo();
         Connection con = conexao.AbrirConexao();
         FilmeDAO sql = new FilmeDAO(con);
         List<Filme> lista = new ArrayList<>();
