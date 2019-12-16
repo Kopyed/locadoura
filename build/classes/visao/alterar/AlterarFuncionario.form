@@ -30,7 +30,7 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="lblcadastro3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="115" max="-2" attributes="0"/>
+                      <Component id="jTF_Cod" min="-2" pref="115" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
@@ -55,7 +55,7 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblcadastro3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTF_Cod" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -118,7 +118,7 @@
         <Property name="text" type="java.lang.String" value="Digite o C&#xf3;digo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="jTF_Cod">
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
@@ -148,8 +148,8 @@
                           </Group>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField4" pref="213" max="32767" attributes="0"/>
-                              <Component id="jTextField5" max="32767" attributes="0"/>
+                              <Component id="jTF_Login" pref="213" max="32767" attributes="0"/>
+                              <Component id="jTF_Senha" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                           <Component id="ERTIUJREITJERLIKT" min="-2" pref="76" max="-2" attributes="0"/>
@@ -161,8 +161,8 @@
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField2" min="-2" pref="79" max="-2" attributes="0"/>
-                              <Component id="jTextField3" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
+                              <Component id="jTF_Codigo" min="-2" pref="79" max="-2" attributes="0"/>
+                              <Component id="jTF_Nome" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" pref="145" max="-2" attributes="0"/>
@@ -180,24 +180,24 @@
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblcadastro4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTF_Codigo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblcadastro6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTF_Nome" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTF_Login" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblcadastro5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblcadastro7" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTF_Senha" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="ERTIUJREITJERLIKT" max="32767" attributes="0"/>
@@ -222,7 +222,7 @@
             <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="jTF_Codigo">
         </Component>
         <Component class="javax.swing.JLabel" name="lblcadastro5">
           <Properties>
@@ -232,7 +232,7 @@
             <Property name="text" type="java.lang.String" value="Login:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="jTF_Nome">
         </Component>
         <Component class="javax.swing.JLabel" name="lblcadastro6">
           <Properties>
@@ -242,7 +242,7 @@
             <Property name="text" type="java.lang.String" value="Nome:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="jTF_Login">
         </Component>
         <Component class="javax.swing.JLabel" name="lblcadastro7">
           <Properties>
@@ -252,7 +252,7 @@
             <Property name="text" type="java.lang.String" value="Senha:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="jTF_Senha">
         </Component>
         <Component class="javax.swing.JLabel" name="ERTIUJREITJERLIKT">
           <Properties>
@@ -274,6 +274,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
@@ -287,6 +290,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

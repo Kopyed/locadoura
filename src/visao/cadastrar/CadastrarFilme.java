@@ -395,7 +395,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
     private void btCapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapaActionPerformed
         try{
             JFileChooser foto = new JFileChooser();
-            foto.setCurrentDirectory(new File("/C:/Video Locadora/Pictures/"));
+            foto.setCurrentDirectory(new File("/C:/Video Locadora/Pictures/"+jTF_Capa.getText() + "/"));
             foto.setDialogTitle("Carregar Capa");
             foto.showOpenDialog(this);
             String a = "" + foto.getSelectedFile().getName();

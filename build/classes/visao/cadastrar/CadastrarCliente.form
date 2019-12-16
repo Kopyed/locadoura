@@ -60,8 +60,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="jTF_RG" min="-2" pref="211" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
                                           <Component id="lblcadastro5" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="tfCPF" min="-2" pref="224" max="-2" attributes="0"/>
@@ -85,7 +84,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jTF_Numero" min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
@@ -96,6 +95,7 @@
                                       <Component id="jTF_Nascimento" min="-2" pref="153" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jTF_Email" min="-2" pref="504" max="-2" attributes="0"/>
+                                  <Component id="jTF_RG" alignment="0" min="-2" pref="212" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -124,8 +124,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblcadastro4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblcadastro5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTF_RG" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTF_RG" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -263,8 +263,6 @@
         <Property name="text" type="java.lang.String" value="Rua:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTF_RG">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblcadastro9">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -395,6 +393,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTF_TelefoneActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jTF_RG">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+          <Format format="####################" subtype="-1" type="5"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

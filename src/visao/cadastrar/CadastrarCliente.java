@@ -33,7 +33,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         lblcadastro6 = new javax.swing.JLabel();
         lblcadastro7 = new javax.swing.JLabel();
         lblcadastro8 = new javax.swing.JLabel();
-        jTF_RG = new javax.swing.JTextField();
         lblcadastro9 = new javax.swing.JLabel();
         lblcadastro10 = new javax.swing.JLabel();
         jTF_Bairro = new javax.swing.JTextField();
@@ -49,6 +48,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jTF_Nascimento = new javax.swing.JFormattedTextField();
         jTF_CEP = new javax.swing.JFormattedTextField();
         jTF_Telefone = new javax.swing.JFormattedTextField();
+        jTF_RG = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Video Locadora");
@@ -190,6 +190,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
+        try {
+            jTF_RG.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####################")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -224,8 +230,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jTF_RG, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(33, 33, 33)
+                                            .addGap(244, 244, 244)
                                             .addComponent(lblcadastro5)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,7 +257,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
                                         .addComponent(lblcadastro7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTF_Nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTF_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jTF_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTF_RG, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(63, 63, 63))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -272,8 +278,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro4)
                     .addComponent(lblcadastro5)
-                    .addComponent(jTF_RG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTF_RG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro6)
@@ -412,7 +418,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTF_Nascimento;
     private javax.swing.JTextField jTF_Nome;
     private javax.swing.JTextField jTF_Numero;
-    private javax.swing.JTextField jTF_RG;
+    private javax.swing.JFormattedTextField jTF_RG;
     private javax.swing.JTextField jTF_Rua;
     private javax.swing.JFormattedTextField jTF_Telefone;
     private javax.swing.JLabel lblcadastro;

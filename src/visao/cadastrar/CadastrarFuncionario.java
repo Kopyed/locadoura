@@ -43,11 +43,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         lblcadastro3 = new javax.swing.JLabel();
         jTF_Login = new javax.swing.JTextField();
         lblcadastro4 = new javax.swing.JLabel();
-        jTF_Senha = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jTF_Senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -163,11 +163,11 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro3)
                     .addComponent(jTF_Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTF_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblcadastro4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblcadastro4)
+                    .addComponent(jTF_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -262,7 +262,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField jTF_Codigo;
     private javax.swing.JTextField jTF_Login;
     private javax.swing.JTextField jTF_Nome;
-    private javax.swing.JTextField jTF_Senha;
+    private javax.swing.JPasswordField jTF_Senha;
     private javax.swing.JLabel lblcadastro;
     private javax.swing.JLabel lblcadastro1;
     private javax.swing.JLabel lblcadastro2;

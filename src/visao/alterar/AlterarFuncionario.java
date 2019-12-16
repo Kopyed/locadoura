@@ -5,6 +5,14 @@
  */
 package visao.alterar;
 
+import DAO.FuncionarioDAO;
+import DAO.conexao;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.Funcionario;
+
 /**
  *
  * @author paulo
@@ -17,7 +25,22 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     public AlterarFuncionario() {
         initComponents();
     }
-
+    private void InserirDados(int cod) {
+        
+            Connection con = conexao.AbrirConexao();
+            FuncionarioDAO sql = new FuncionarioDAO(con);
+            List<Funcionario> lista = new ArrayList<>();
+            lista = sql.CapturarFuncionario(cod);
+            
+            for (Funcionario a : lista) {
+                
+                jTF_Codigo.setText("" + a.getCod());
+                jTF_Nome.setText(a.getNome());
+                jTF_Login.setText(a.getLogin());
+                jTF_Senha.setText(a.getSenha());
+                } 
+            conexao.FecharConexao(con);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,17 +53,17 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblcadastro = new javax.swing.JLabel();
         lblcadastro3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTF_Cod = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblcadastro4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTF_Codigo = new javax.swing.JTextField();
         lblcadastro5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTF_Nome = new javax.swing.JTextField();
         lblcadastro6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTF_Login = new javax.swing.JTextField();
         lblcadastro7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTF_Senha = new javax.swing.JTextField();
         ERTIUJREITJERLIKT = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -112,8 +135,8 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                             .addComponent(lblcadastro7))
                         .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                            .addComponent(jTextField5))
+                            .addComponent(jTF_Login, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                            .addComponent(jTF_Senha))
                         .addGap(104, 104, 104)
                         .addComponent(ERTIUJREITJERLIKT, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -122,8 +145,8 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                             .addComponent(lblcadastro6))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(46, 46, 46)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -136,21 +159,21 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblcadastro4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblcadastro6)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTF_Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblcadastro5))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblcadastro7)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTF_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(ERTIUJREITJERLIKT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -159,6 +182,11 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         );
 
         jButton2.setText("Limpar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Alterar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -168,6 +196,11 @@ public class AlterarFuncionario extends javax.swing.JFrame {
         });
 
         jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,7 +213,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(lblcadastro3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTF_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -200,7 +233,7 @@ public class AlterarFuncionario extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblcadastro3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTF_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(28, 28, 28)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,12 +249,75 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String codigo = jTF_Cod.getText();
+        Connection con = conexao.AbrirConexao();
+        FuncionarioDAO sql = new FuncionarioDAO(con);
+        int cod = Integer.parseInt(codigo);
+        
+        if (sql .Testar_Funcionario(cod) == false) {
+            JOptionPane.showMessageDialog(null, "Codigo não Encontrado no Banco",
+                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
+            conexao.FecharConexao(con);
+        }
+        if (codigo.equals("")) {
+        
+        JOptionPane.showMessageDialog(null, "Digite um codigo para Atualizar",
+                "Video Locadora", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        jTF_Codigo.setText("");
+        jTF_Nome.setText("");
+        jTF_Login.setText("");
+        jTF_Senha.setText("");
+        
+        InserirDados(cod);
+        jTF_Cod.setText("");
+    
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+      String codigo = jTF_Codigo.getText();
+        String nome = jTF_Nome.getText();
+        String login = jTF_Login.getText();
+        String senha = jTF_Senha.getText();
+        if (nome.equals("")) {
+            JOptionPane.showMessageDialog(null, "nenhum campo pode estar vazio", 
+                "Video Locadora", JOptionPane.WARNING_MESSAGE);
+        } else {
+        Connection con = conexao.AbrirConexao();
+        FuncionarioDAO sql =  new FuncionarioDAO(con);
+        int cod = Integer.parseInt(codigo);
+        Funcionario a = new Funcionario();
+        
+        a.setCod(cod);
+        a.setNome(nome);
+        a.setLogin(login);
+        a.setSenha(senha);
+        
+        sql.Alterar_Funcionario(a);
+        conexao.FecharConexao(con);
+        
+        jTF_Nome.setText("");
+        jTF_Login.setText("");
+        jTF_Senha.setText("");
+        JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso",
+                "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTF_Cod.setText("");
+        jTF_Nome.setText("");
+        jTF_Login.setText("");
+        jTF_Senha.setText("");
+                // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,11 +363,11 @@ public class AlterarFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTF_Cod;
+    private javax.swing.JTextField jTF_Codigo;
+    private javax.swing.JTextField jTF_Login;
+    private javax.swing.JTextField jTF_Nome;
+    private javax.swing.JTextField jTF_Senha;
     private javax.swing.JLabel lblcadastro;
     private javax.swing.JLabel lblcadastro3;
     private javax.swing.JLabel lblcadastro4;
