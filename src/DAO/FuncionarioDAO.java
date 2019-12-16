@@ -10,6 +10,32 @@ public class FuncionarioDAO extends ExecuteSQL {
     public FuncionarioDAO(Connection con){
     super(con);
     }
+     public List<Funcionario> Pesquisar_Nome_Funcionario(String nome) {
+        String sql = "select idfuncionario, nome, login, senha from funcionario where nome like '%" + nome + "%'";
+        List<Funcionario> lista = new ArrayList<>();
+        
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    Funcionario a = new Funcionario();
+                    a.setCod(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setLogin(rs.getString(3));
+                    a.setSenha(rs.getString(4));
+                    lista.add(a); 
+                  }
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+   
+}
     public boolean Logar (String login, String senha){
         boolean finalResult = false;
     try{

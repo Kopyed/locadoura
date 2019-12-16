@@ -8,12 +8,9 @@
             <file>file:/C:/Users/paulo/Documents/NetBeansProject/SistemaLocadora/src/visao/cadastrar/CadastrarFuncionario.java</file>
         </group>
         <group>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/locacao/Cadastrodelocacao.java</file>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/DAO/categoriaDAO.java</file>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/visao/cadastrar/CadastrarFilme.java</file>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/DAO/FilmeDAO.java</file>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/visao/cadastrar/CadastrarDVD.java</file>
-            <file>file:/C:/Users/paulo/Documents/NetBeansProject/locadoura/src/visao/consultar/ConsultarClassificacao.java</file>
+            <file>file:/C:/Users/pedro/Documents/NetBeansProjects/locadoura/src/DAO/FuncionarioDAO.java</file>
+            <file>file:/C:/Users/pedro/Documents/NetBeansProjects/locadoura/src/visao/consultar/ConsultarCliente.java</file>
+            <file>file:/C:/Users/pedro/Documents/NetBeansProjects/locadoura/src/visao/consultar/ConsultarFuncionario.java</file>
         </group>
     </open-files>
 </project-private>
