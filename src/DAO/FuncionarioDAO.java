@@ -11,7 +11,7 @@ public class FuncionarioDAO extends ExecuteSQL {
     super(con);
     }
      public List<Funcionario> Pesquisar_Nome_Funcionario(String nome) {
-        String sql = "select idfuncionario, nome, login, senha from funcionario where nome like '%" + nome + "%'";
+        String sql = "select * from funcionario where nome like '%" + nome + " %'";
         List<Funcionario> lista = new ArrayList<>();
         
         try{
@@ -80,35 +80,32 @@ public class FuncionarioDAO extends ExecuteSQL {
        }
    } 
  public List<Funcionario> ListarFuncionario(){ 
-     String sql = "select idfuncionario,nome,login,senha from funcionario";
+     String sql = "select * from funcionario";
         List<Funcionario> lista = new ArrayList<>();
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs != null){
-           
-                while(rs.next()){
-                    Funcionario a = new Funcionario();
+            if(rs != null) {
+                while (rs.next()){
+                    Funcionario a= new Funcionario();
                     a.setCod(rs.getInt(1));
                     a.setNome(rs.getString(2));
                     a.setLogin(rs.getString(3));
                     a.setSenha(rs.getString(4));
-                   
                     lista.add(a);
-                }
+                  }
                 return lista;
             }else{
-            return null;
+                return null;
+                
             }
-            
-        }catch(SQLException e) {
+        } catch (SQLException e) {
             return null;
-        }    
+        }  
  }
  
  public List<Funcionario> Pesquisar_Cod_Funcionario(int cod){
-        String sql = "select idfuncionario,nome,login,senha from funcionario where idfuncionario like '%" + cod + "%'";
+        String sql = "select * from funcionario where idfuncionario like '%" + cod + " %'";
         List<Funcionario> lista = new ArrayList<>();
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
