@@ -2,21 +2,66 @@
 package visao.alterar;
 
 import DAO.FilmeDAO;
+import DAO.categoriaDAO;
+import DAO.classificacaoDAO;
 import DAO.conexao;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import modelo.Categoria;
+import modelo.Classificacao;
 import modelo.Filme;
 import principal.Menu;
+import DAO.*;
+import Modelo.*;
+import java.io.File;
+import java.sql.*;
+import java.util.*;
+import javax.swing.*;
+
 
 
 public class AlterarFilme extends javax.swing.JFrame {
 
-   
-    public AlterarFilme()  {
-        initComponents();
+     private void AtualizaComboClassificacao(){
+        Connection con = conexao.AbrirConexao();
+        classificacaoDAO sql = new classificacaoDAO(con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = sql.ListarClassificacao();
+     
+        jCB_Classificacao.addItem("");
+        jTF_Classificacao.setText("");
+         
+        for (Classificacao b: lista){
+            jCB_Classificacao.addItem(b.getNome());
+            
+       }
+        conexao.FecharConexao(con);
     }
+    private void AtualizaComboCategoria(){
+        Connection con = conexao.AbrirConexao();
+        categoriaDAO sql = new categoriaDAO(con);
+        List<Categoria> lista = new ArrayList<>();
+        lista = sql.ListarComboCategoria();
+        
+        jCB_Categoria.addItem("");
+        jTF_Classificacao.setText("");
+        
+        for (Categoria b: lista){
+            jCB_Categoria.addItem(b.getNome());
+        }
+        conexao.FecharConexao(con);
+    }
+    
+    public AlterarFilme() {
+        initComponents();
+        AtualizaComboClassificacao();
+        AtualizaComboCategoria();
+        setLocationRelativeTo(this);
+    }
+   
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -120,6 +165,11 @@ public class AlterarFilme extends javax.swing.JFrame {
         jLabel5.setText("Capa:");
 
         jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         lB_Foto.setText("DVD Video");
 
@@ -294,24 +344,33 @@ public class AlterarFilme extends javax.swing.JFrame {
 
     private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
 
-        String codigo = jTF_cod.getText();
+      String codigo = jTF_cod.getText();
         Connection con = conexao.AbrirConexao();
         FilmeDAO sql = new FilmeDAO(con);
         int cod = Integer.parseInt(codigo);
-        if(sql.Testar_Filme(cod) == false){
-            JOptionPane.showMessageDialog(null,"Código não encontrado no banco",
-                "Video locadora", JOptionPane.ERROR_MESSAGE);
+        
+        if (sql .Testar_Filme(cod) == false) {
+            JOptionPane.showMessageDialog(null, "Codigo não Encontrado no Banco",
+                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
             conexao.FecharConexao(con);
         }
-        if (codigo.equals("")){
-            JOptionPane.showMessageDialog(null,"Digite um codigo para atualizar",
-                "video locadora", JOptionPane.WARNING_MESSAGE);
+        if (codigo.equals("")) {
+        
+        JOptionPane.showMessageDialog(null, "Digite um codigo para Atualizar",
+                "Video Locadora", JOptionPane.WARNING_MESSAGE);
         }
+        
         jTF_Codigo.setText("");
         jTF_Titulo.setText("");
-
+        jTF_Ano.setText("");
+        jTF_Duracao.setText("");
+        jTF_Categoria.setText("");
+        jTF_Classificacao.setText("");
+        jTF_Capa.setText("");
+        
         InserirDados(cod);
         jTF_cod.setText("");
+
     }//GEN-LAST:event_btOKActionPerformed
 
     private void jTF_AnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_AnoActionPerformed
@@ -357,6 +416,20 @@ public class AlterarFilme extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTF_TituloActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+try{         
+        JFileChooser foto = new JFileChooser();
+        foto.setCurrentDirectory(new File("C:\\Users\\User\\Documents\\NetBeansProjects\\Projeto_Locadora\\src\\Imagens"));
+        foto.setDialogTitle("Carregr Capa");
+        foto.showOpenDialog(this);
+        String a = "" + foto.getSelectedFile().getName();
+        jTF_Capa.setText (a);
+        lB_Foto.setIcon(new ImageIcon
+        (""+ jTF_Capa.getText () + "/"));
+     }catch (Exception e){
+         JOptionPane.showMessageDialog(null, "Não foi possivel carregar capa");
+    }//GEN-LAST:event_jButton1ActionPerformed
+}
     /**
      * @param args the command line arguments
      */
