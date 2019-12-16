@@ -43,33 +43,34 @@ public class FilmeDAO extends ExecuteSQL{
         }
    
 }
-     public List<Filme> Pesquisar_Cod_Filme(int cod){
-    String sql = "select idfilme,titulo,ano,duracao,idcategoria,idclassificacao,"
-            +"capa from filme whhere idfilme = '" + cod + "'";
-        List<Filme> lista = new ArrayList<>();
+  
+        public List<Filme> Pesquisar_Cod_Filme(int cod) {
+        String sql = "select idfilme, titulo , ano, duracao, idcategoria, idclassificacao, capa from filme where idfilme like '%" + cod + "%'";
+           List<Filme> lista = new ArrayList<>();
         try{
-           PreparedStatement ps = getCon().prepareStatement(sql);
-           ResultSet rs = ps.executeQuery();
-           if(rs != null){
-            while (rs.next()){
-                Filme a = new Filme();
-                a.setCodigo(rs.getInt(1));
-                a.setTitulo(rs.getString(2));
-                a.setAno(rs.getInt(3));
-                a.setDuracao(rs.getString(4));
-                a.setCod_categoria(rs.getInt(5));
-                a.setCod_classificao(rs.getInt(6));
-                a.setCapa(rs.getString(7));
-                lista.add(a);
-                }
-            return lista;
-            }else{
-               return null;
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    Filme a= new Filme();
+                     a.setCodigo(rs.getInt(1));
+                    a.setTitulo(rs.getString(2));
+                    a.setAno(rs.getInt(3));
+                    a.setDuracao(rs.getString(4));
+                    a.setCod_categoria(rs.getInt(5));
+                    a.setCod_classificao(rs.getInt(6));
+                    a.setCapa(rs.getString(7));
+                    lista.add(a); 
                   }
-        } catch (SQLException e){
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
             return null;
-        }
-        }
+        }}
+        
        public String Inserir_Filme(Filme a) throws SQLException{
        String sql = "insert into filme values(0,?,?,?,?,?,?)";
        try{
@@ -188,27 +189,26 @@ public class FilmeDAO extends ExecuteSQL{
 
   public List<Filme> ListarComboFilme(){
       
-      
-      String sql = "select titulo from filme order by titulo";
-      List<Filme> lista = new ArrayList<>();
-      try{
-          PreparedStatement ps =  getCon().prepareStatement(sql);
-          ResultSet rs = ps.executeQuery();
-          
-          if(rs != null){
-              while (rs.next()){
-                  
-                  Filme a = new Filme();
-                  a.setCodigo(rs.getInt(1));
-                  lista.add(a);
+     String sql = "select titulo from filme order by titulo";
+          List<Filme> lista = new ArrayList<>();
+          try {
+              PreparedStatement ps = getCon().prepareStatement(sql);
+              ResultSet rs = ps.executeQuery();
+              
+              if (rs != null) {
+              while (rs.next()) {
+              
+              Filme a = new Filme();
+              a.setTitulo(rs.getString(1));
+              lista.add(a);
               }
               return lista;
-          }else{
+              } else{
+              return null;
+              }
+          } catch (Exception e){
               return null;
           }
-      }catch(Exception e){
-          return null;
-      }
   }
   
   

@@ -62,35 +62,52 @@ public class categoriaDAO extends ExecuteSQL {
            return e.getMessage();
        }
    } 
- public List<Categoria> ListarCategoria(){ 
-     String sql = "select idcategoria, nome from categoria";
+public List<Categoria> ListarCategoria(){
+        String sql = "select idcategoria,nome from categoria";
         List<Categoria> lista = new ArrayList<>();
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs != null){
-           
-                while(rs.next()){
-                    Categoria a = new Categoria();
-                    
-                    a.setNome(rs.getString(1));
+            if(rs != null) {
+                while (rs.next()){
+                    Categoria a= new Categoria();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                  
                     lista.add(a);
-                }
+                  }
                 return lista;
             }else{
-            return null;
+                return null;
+                
             }
-            
-        }catch(SQLException e) {
+        } catch (SQLException e) {
             return null;
-        }    
- }
+        }
+    }
  
   public List<Categoria> Pesquisar_Cod_Categoria(int cod){
-      String sql
-              = "select idcategoria, nome  from categoria where idcategoria = '"+cod+"'";
-        return null;
+         String sql = "select idcategoria,nome from categoria where idcategoria like '%" + cod + "%'";
+         List<Categoria> lista = new ArrayList<>();
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    Categoria a= new Categoria();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                  
+                    lista.add(a);
+                  }
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
+            return null;
+        }
   }
   
   public boolean Testar_Categoria(int cod){

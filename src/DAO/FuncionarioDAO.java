@@ -81,35 +81,49 @@ public class FuncionarioDAO extends ExecuteSQL {
         }    
  }
  
-  public List<Funcionario> Pesquisar_Cod_Cliente(int cod){
-      String sql
-              = "select idcliente, Nome , RG, CPF, Telefone, Email"
-              +" from cliente where idcliente = '"+cod+"'";
-        return null;
-  }
-  
-  public boolean Testar_Cliente(int cod){
-      boolean Resultado = false;
-      try{
-      
-      String sql = "select * from cliente where idcliente ="+cod+"";
-      PreparedStatement ps = getCon().prepareStatement(sql);
-      ResultSet rs = ps.executeQuery();
-      
-      if(rs != null){
-          while(rs.next()){
-              Resultado = true;
-          }
-          
-      }
-      
-      }catch(SQLException ex){
-          ex.getMessage();
-      }
-      
-        return Resultado;
-      
-  }
+ public List<Funcionario> Pesquisar_Cod_Funcionario(int cod){
+        String sql = "select idfuncionario,nome,login,senha from funcionario where idfuncionario like '%" + cod + "%'";
+        List<Funcionario> lista = new ArrayList<>();
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    Funcionario a= new Funcionario();
+                    a.setCod(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setLogin(rs.getString(3));
+                    a.setSenha(rs.getString(4));
+                    lista.add(a);
+                  }
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    } 
+ 
+ public boolean Testar_Funcionario(int cod){
+            boolean Resultado = false;
+            try {
+            
+                String sql = "select * from funcionario where idfuncionario = " + cod +"";
+                PreparedStatement ps = getCon().prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs != null) {
+                   while (rs.next()) {
+                   Resultado = true;
+                   }
+                }
+            }catch (SQLException ex) {
+                ex.getMessage();
+            }
+            return Resultado;
+        }
   
   public List<Funcionario> CapturarFuncionario(int cod){
       String sql = "select * from Funcionario where idfuncionario ="+ cod +"";
@@ -136,27 +150,24 @@ public class FuncionarioDAO extends ExecuteSQL {
           
       }
   }
-  public String Alterar_Funcionario(Funcionario a){
-      String sql = "update cliente set nome = ? ,data_nasc = ? ,rg = ? "
-                    + ",cpf = ? ,email = ? ,telefone = ? ,bairro = ?,rua = ?"
-                    +",numero = ?,cep = ? where idcliente = ?";
-      try{
-          PreparedStatement ps = getCon().prepareStatement(sql);
-          ps.setInt(1, a.getCod());
-          ps.setString(2, a.getNome());
-          ps.setString(3, a.getLogin());
-          ps.setString(4, a.getSenha());
-         
- 
-          if (ps.executeUpdate() > 0){
-              return "Atualizado com sucesso.";
-          }else{
-              return "Erro ao atualizar";
-          }
-      }catch (SQLException e){
+   public String Alterar_Funcionario(Funcionario a){
+            String sql = "update funcionario set nome = ? , login = ? ,senha = ? where idfuncionario = ? ";
+        try {
+            
+            PreparedStatement ps =  getCon().prepareStatement(sql);
+            ps.setString(1, a.getNome());
+            ps.setString(2, a.getLogin());
+            ps.setString(3, a.getSenha());
+            ps.setInt(4, a.getCod());
+            if (ps.executeUpdate() > 0){
+                return "Atualizado com Sucesso.";
+            } else {
+                return "Erro ao Atualizar";
+            }
+      } catch (SQLException e) {
           return e.getMessage();
       }
-  }
+        }
   
 
   public List<Funcionario> ListarComboFuncionario(){
@@ -185,46 +196,47 @@ public class FuncionarioDAO extends ExecuteSQL {
   }
   
   
-  public List<Funcionario> ConsultaCodigoCliente(String nome){
+ public List<Funcionario> ConsultaCodigoFuncionario(String nome){
       
-      String sql = "select idcliente from cliente where nome = '"+nome+"'";
-      List<Funcionario> lista = new ArrayList<>();
-      try{
-          PreparedStatement ps = getCon().prepareStatement(sql);
-          ResultSet rs = ps.executeQuery();
-          
-          if(rs != null){
-              while(rs.next()){
+          String sql = "select idfuncionario from funcionario where nome = '" + nome + " '";
+          List<Funcionario> lista = new ArrayList<>();
+          try {
+              PreparedStatement ps = getCon().prepareStatement(sql);
+              ResultSet rs = ps.executeQuery();
               
+              if (rs != null){
+              while (rs.next()) {
                   Funcionario a = new Funcionario();
                   a.setCod(rs.getInt(1));
                   lista.add(a);
               }
               return lista;
-          }else{
+              } else {
+                  return null;
+              }
+          } catch (Exception e){
               return null;
           }
-      } catch(Exception e){
-          return null;
-  
       }
-  }
   
   public String Excluir_Funcionario(Funcionario a){
-      String sql = "delete from cliente where idcliente = ? and nome = ?";
-      
-      try{
+
+String sql = "delete from funcionario where idfuncionario = ? and nome = ?";
+          
+          try{
           PreparedStatement ps = getCon().prepareStatement(sql);
           ps.setInt(1, a.getCod());
           ps.setString(2, a.getNome());
-          if (ps.executeUpdate() > 0){
-              return "Excluido com Sucesso.";
-          }else{
-              return "Erro ao excluir.";
+            if(ps.executeUpdate() > 0){
+                return "Excluido com Sucesso.";
+            } else{
+                return "Erro ao Excluir.";
+            }
+          
+          } catch (SQLException e){
+              return e.getMessage();
           }
-      }catch (SQLException e){
-          return e.getMessage();
       }
-  }
+      
     
 }    

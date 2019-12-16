@@ -164,6 +164,11 @@ public class CadastrarFilme extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
 
         jButton2.setText("Limpar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btOK.setText("Cadastrar");
         btOK.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +178,11 @@ public class CadastrarFilme extends javax.swing.JFrame {
         });
 
         jButton4.setText("cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -402,6 +412,19 @@ public class CadastrarFilme extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jTF_CapaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+                jTF_Codigo.setText("");
+                jTF_titulo.setText("");
+                jTF_Ano.setText("");
+                jTF_Duracao.setText("");
+                jTF_Classificacao.setText("");
+                jTF_Capa.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

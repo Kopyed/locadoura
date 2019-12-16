@@ -522,7 +522,7 @@ public class Cadastrodelocacao extends javax.swing.JFrame {
           
           try{
               Connection con = conexao.AbrirConexao();
-              PreparedStatement ps = getCon().prepareStatement(sql);
+              PreparedStatement ps = getcon().prepareStatement(sql);
               ResultSet rs = ps.executeQuery();
           
               if(rs != null){

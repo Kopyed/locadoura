@@ -82,39 +82,56 @@ public class DVDDAO extends ExecuteSQL {
     
     
  public List<DVD> ListarDVD(){ 
-     String sql = "select iddvd,idfilme,preco_compra,data_compra,situacao from dvd";
+   
+      String sql = "select iddvd, idfilme, preco_compra, data_compra, situacao from dvd";
         List<DVD> lista = new ArrayList<>();
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs != null){
-           
-                while(rs.next()){
-                    DVD a = new DVD();
+            if(rs != null) {
+                while (rs.next()){
+                    DVD a= new DVD();
                     a.setCodigo(rs.getInt(1));
                     a.setCod_filme(rs.getInt(2));
-                    a.setSituacao(rs.getString(3));
-                    a.setPreco(rs.getDouble(4));
-                    a.setData_compra(rs.getString(5));
-                    
+                    a.setPreco(rs.getInt(3));
+                    a.setData_compra(rs.getString(4));                   
+                    a.setSituacao(rs.getString(5));
                     lista.add(a);
-                }
+                  }
                 return lista;
             }else{
-            return null;
+                return null;
+                
             }
-            
-        }catch(SQLException e) {
+        } catch (SQLException e) {
             return null;
-        }    
+        } 
  }
  
   public List<DVD> Pesquisar_Cod_DVD(int cod){
-      String sql
-              = "select iddvd, idfilme , preco_compra , data_compra, "
-              +" from dvd where iddvd = '"+cod+"'";
-        return null;
+     String sql = "select iddvd, idfilme, preco_compra, data_compra, situacao from dvd where iddvd like '%" + cod + "%'";
+           List<DVD> lista = new ArrayList<>();
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    DVD a= new DVD();
+                    a.setCodigo(rs.getInt(1));
+                    a.setCod_filme(rs.getInt(2));
+                    a.setPreco(rs.getInt(3));
+                    a.setData_compra(rs.getString(4));                   
+                    a.setSituacao(rs.getString(5));
+                    lista.add(a);
+                  }
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
+            return null;
+        }
   }
   
   
